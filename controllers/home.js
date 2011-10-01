@@ -1,5 +1,5 @@
 require("hiredis");
-var client = require("redis").createClient();
+//var client = require("redis").createClient();
 
 module.exports = function(routes, Transitive){
   
