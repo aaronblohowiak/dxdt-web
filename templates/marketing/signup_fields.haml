@@ -1,0 +1,21 @@
+- locals || (locals={})
+  locals.fields || (fields={})
+  locals.errors || (errors={})
+
+  //avoid passing this stuff in every time.
+  this.app.fields = fields
+  this.app.errors = errors
+
+!= this.render("form/input", {label:"Email address", name: "email", ti: 1, errMsg: " Please enter a valid email"})
+!= this.render("form/input", {label:"Password", name: "password", ti: 2, type:"password", errMsg:"Must be between 4 and 80 letters"})
+!= this.render("form/input", {label:"Cell Phone", name: "cell", ti: 3, tip:'Used for SMS Alerts, Security and Account Information'})
+
+
+.clearfix
+  %label Plan
+  .input
+    %select(tabindex=4)
+      != this.render("form/options", {options:[["Small", "s1"], ["Medium", "m1"], ["Large", "l1"], ["X-Large", "xl1"], ["Custom", "custom"]] })
+
+
+!= this.render("form/checkbox", {label:"Terms of Service", name: "tos", ti: 5, additionalText: 'I have read and agree to the <a href="/terms">Terms of Service</a>', wrapperStyle:"margin-bottom:0px", errMsg:"You must agree to the TOS to continue."})

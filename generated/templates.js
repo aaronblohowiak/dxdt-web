@@ -1,34 +1,4 @@
-module.exports={  "account-old": function anonymous(locals) {
-with(locals || {}) {
-  try {
-   var _$output="<div class=\"row\"><div class=\"span4 leftnav\"><div class=\"nav-category\"><h3><div class=\"ico\">♛</div><a href=\"/\">Environments</a></h3><div class=\"listing active\"> <a href=\"/\">Dev</a> </div><div class=\"listing\"> <a href=\"/\">Staging</a> </div><div class=\"listing\"> <a href=\"/\">Production</a> </div></div><div class=\"nav-category\"><h3><div class=\"ico\">♞</div><a href=\"/\">Servers</a></h3><div class=\"listing active\"> <a href=\"/\">Web Server 1</a> </div><div class=\"listing\"> <a href=\"/\">Web Server 2</a> </div><div class=\"listing\"> <a href=\"/\">Redis Server 1</a> </div></div><div class=\"nav-category\"><h3><div class=\"ico\">♟</div><a href=\"/\">Web Server 1</a></h3><div class=\"listing\"> <a href=\"/\">Overview</a> </div><div class=\"listing active\"> <a href=\"/\">Processes</a> </div><div class=\"listing\"> <a href=\"/\">CPU</a> </div><div class=\"listing\"> <a href=\"/\">Memory</a> </div><div class=\"listing\"> <a href=\"/\">Disk</a> </div><div class=\"listing\"> <a href=\"/\">Open Ports</a> </div></div></div><div class=\"span12\"><div class=\"row\"><div style=\"border-right:1px solid black; margin-right: -1px\" class=\"span6\"><h2>Most Memory</h2></div><div class=\"span6\"><h2>Most CPU</h2></div></div><div class=\"row\"><div class=\"span11 column\"><table class=\"zebra-striped\"><thead><tr><th>PID</th>" +
-"";columns = "lstart ucomm mem cpu rss vsz utime time".split(" "); _$output = _$output  +
-"";for(idx in columns){; _$output = _$output  +
-"<th>" + 
-this.escape(columns[idx].toUpperCase()) + 
-"</th>" +
-"";}; _$output = _$output  + 
-"</tr></thead><tbody>" + 
-"";for(pid in status.processes.lstart){
-status.processes.lstart[pid] = new Date(Date.parse(status.processes.lstart[pid])).toDateString(); _$output = _$output  +
-"<tr><td>" + 
-this.escape(pid) + 
-"</td>" +
-"";for(idx in columns){; _$output = _$output  +
-"<td>" + 
-"";name = columns[idx]; _$output = _$output  +
-this.escape((status.processes[name] && status.processes[name][pid])) + 
-"</td>" +
-"";}; _$output = _$output  + 
-"</tr>" +
-"";}; _$output = _$output  + 
-"</tbody></table></div></div></div></div>";
- return _$output;  } catch (e) {
-    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
-  }
-}
-}
-,  "account": function anonymous(locals) {
+module.exports={  "account": function anonymous(locals) {
 with(locals || {}) {
   try {
    var _$output="<div class=\"row\"><div class=\"span4 leftnav\"><div class=\"nav-category\"><h3><div class=\"ico\">♛</div><a href=\"/\">Environments</a></h3><div class=\"listing active\"> <a href=\"/\">Dev</a> </div><div class=\"listing\"> <a href=\"/\">Staging</a> </div><div class=\"listing\"> <a href=\"/\">Production</a> </div></div><div class=\"nav-category\"><h3><div class=\"ico\">♞</div><a href=\"/\">Servers</a></h3><div class=\"listing active\"> <a href=\"/\">Web Server 1</a> </div><div class=\"listing\"> <a href=\"/\">Web Server 2</a> </div><div class=\"listing\"> <a href=\"/\">Redis Server 1</a> </div></div><div class=\"nav-category\"><h3><div class=\"ico\">♟</div><a href=\"/\">Web Server 1</a></h3><div class=\"listing\"> <a href=\"/\">Overview</a> </div><div class=\"listing active\"> <a href=\"/\">Processes</a> </div><div class=\"listing\"> <a href=\"/\">CPU</a> </div><div class=\"listing\"> <a href=\"/\">Memory</a> </div><div class=\"listing\"> <a href=\"/\">Disk</a> </div><div class=\"listing\"> <a href=\"/\">Open Ports</a> </div></div></div><div class=\"span12\"><div class=\"row\"><div style=\"border-right:1px solid black; margin-right: -1px\" class=\"span6\"><h2>Most Memory</h2></div><div class=\"span6\"><h2>Most CPU</h2></div></div><div class=\"row\"><div class=\"span11 column\"><table class=\"zebra-striped\"><thead><tr><th>PID</th>" +
@@ -79,6 +49,113 @@ this.crumbs = ["Staging"]
   }
 }
 }
+,  "form/checkbox": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="";if(!locals.type) locals.type="checkbox"; _$output = _$output  +
+"";this.render("form/clean_input", locals)
+; _$output = _$output  +
+"<div class=\"" + this.escape("clearfix " + klass) + "\" style=\"" + this.escape(wrapperStyle) + "\">" + 
+"<label>" + 
+this.escape(label) + 
+"</label><div class=\"inputs\"><ul class=\"inputs-list\"><li class=\"input\"><label>" +
+" <input name=\"" + this.escape(name) + "\" tabindex=\"" + this.escape(ti) + "\" value=\"on\" type=\"" + this.escape(type) + "\" id=\"email\" /> " +
+(function () { if (locals.additionalText) { return (
+locals.additionalText
+);} else { return ""; } }).call(this) + 
+"</label>" +
+"";if(errors){; _$output = _$output  +
+"<span class=\"help-inline\">" + 
+"";if(locals.errMsg){; _$output = _$output  +
+this.escape(locals.errMsg) +
+"";}else{; _$output = _$output  +
+this.escape(errors.message) +
+"";}      ; _$output = _$output  + 
+"</span>" +
+"";}; _$output = _$output  +
+(function () { if (locals.tip) { return (
+"<span class=\"help-block\">" + 
+this.escape(locals.tip) + 
+"</span>"
+);} else { return ""; } }).call(this) + 
+"</li></ul></div></div>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "form/clean_input": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="";
+if(locals.value===undefined){
+  if(this.app.fields){
+    locals.value = this.app.fields[name];
+  }
+}
+if(locals.errors === undefined){
+  if(this.app.errors){
+    locals.errors = this.app.errors[name];
+  }
+}
+
+if(locals.value===undefined){locals.value='';}
+if(locals.errors===undefined){locals.errors=null;}
+if(!locals.ti){locals.ti=null;}
+if(!locals.type){locals.type="text";}
+
+locals.errors ? locals.klass="error" : locals.klass="";; _$output = _$output ;
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "form/input": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="";this.render("form/clean_input", locals)
+; _$output = _$output  +
+"<div class=\"" + this.escape("clearfix " + klass) + "\">" + 
+"<label>" + 
+this.escape(label) + 
+"</label><div class=\"input\">" +
+" <input name=\"" + this.escape(name) + "\" tabindex=\"" + this.escape(ti) + "\" value=\"" + this.escape(value) + "\" type=\"" + this.escape(type) + "\" id=\"email\" /> " +
+(function () { if (locals.additionalText) { return (
+locals.additionalText
+);} else { return ""; } }).call(this) +
+"";if(errors){; _$output = _$output  +
+"<span class=\"help-inline\">" + 
+"";if(locals.errMsg){; _$output = _$output  +
+this.escape(locals.errMsg) +
+"";}else{; _$output = _$output  +
+this.escape(errors.message) +
+"";}      ; _$output = _$output  + 
+"</span>" +
+"";}; _$output = _$output  +
+(function () { if (locals.tip) { return (
+"<span class=\"help-block\">" + 
+this.escape(locals.tip) + 
+"</span>"
+);} else { return ""; } }).call(this) + 
+"</div></div>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "form/options": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output=(function () { var __result__ = [], __key__, option; for (__key__ in options) { if (options.hasOwnProperty(__key__)) { option = options[__key__]; __result__.push(
+"<option value=\"" + this.escape(option[1]) + "\">" + 
+this.escape(option[0]) + 
+"</option>"
+); } } return __result__.join(""); }).call(this);
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
 ,  "layout": function anonymous(locals) {
 with(locals || {}) {
   try {
@@ -114,6 +191,15 @@ etc +
   }
 }
 }
+,  "marketing/easy": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="<style type=\"text/css\">\n.main ul.unstyled > li{\n  color: #333;\n  font-size:18px;\n  line-height:24px;\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container\"><div class=\"vspace\"></div><div class=\"container main\"><div class=\"row\"><div class=\"span8\"><h1>Easiest Server Monitoring</h1><h2>One-Minute install:</h2><ul class=\"unstyled\"><li>1. Log In</li><li>2. Click the Environment (dev, production) for the server.</li><li>3. Copy the \"Server Setup Command\"</li><li>4. Log in to your server as root and paste the command.</li><li>5. You're done!</li></ul><p>Within a few seconds, you should see your server added to the environment and events added to the <a href=\"/event-stream\">event stream.</a> </p></div><div class=\"span8\"><h1>No Configuration</h1><h2>Every Process and Port</h2><p>Just by installing the script, we start monitoring every process and port. You don't have to worry about installing any plugins or changing things as you add more services to a machine; all new services will be picked up automatically.</p><h2 style=\"margin-top:18px\">Automatic API Keys &amp; Security Tokens!</h2><p>The command you paste into your server downloads a script that is customized for your account and environment.</p><p>It includes an API Key and a Security Token <i>inside</i> the script so there is nothing to configure.</p></div></div></div></div></div>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
 ,  "marketing/landing": function anonymous(locals) {
 with(locals || {}) {
   try {
@@ -126,38 +212,7 @@ this.crumbs = [["", "Features"], ["", "Pricing"], ["", "Contact"], ["", "Documen
   }
 }
 }
-,  "marketing/plans": function anonymous(locals) {
-with(locals || {}) {
-  try {
-   var _$output="";
-this.crumbs = [["", "Features"], ["", "Pricing"], ["", "Contact"], ["", "Documentation"]]
-; _$output = _$output  +
-"<div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container\"><div class=\"vspace\"></div><div class=\"container main\"><div class=\"row\"><div class=\"span8\"><div class=\"row\"><div class=\"span8 plans\"><h1>Plans <small>100% SSL. 4 Week data retention.</small> </h1><div class=\"row\"><div class=\"span4\"><h2>Small <div class=\"price\">$49<div class=\"price\">" + 
-this.escape("/mo") + 
-"</div></div> </h2><p><b>4</b> Servers</p></div><div class=\"span4\"><h2>Medium <div class=\"price\">$95<div class=\"price\">" + 
-this.escape("/mo") + 
-"</div></div> </h2><p><b>8</b> Servers</p></div></div><div class=\"vspace\"></div><div class=\"row\"><div class=\"span4\"><h2>Large <div class=\"price\">$195<div class=\"price\">" + 
-this.escape("/mo") + 
-"</div></div> </h2><p><b>18</b> Servers</p></div><div class=\"span4\"><h2>X-Large <div class=\"price\">$495<div class=\"price\">" + 
-this.escape("/mo") + 
-"</div></div> </h2><p><b>50</b> Servers</p></div></div></div></div><div class=\"row\"><div class=\"vspace2\"></div><div class=\"span8\"><div style=\"padding:0 0px\"><h2>Have more than 50 servers?</h2><p> <a href=\"mailto:custom@dxdt.io\">Email Us</a> for volume discounts.</p></div></div></div></div><div class=\"span8\"><form method=\"POST\"><fieldset><legend>Monitor Everything<br />in One Minute</legend><div class=\"clearfix\"><label>Email address</label><div class=\"input\"><input name=\"email\" tabindex=\"1\" id=\"email\" /></div></div><div class=\"clearfix\"><label>Password</label><div class=\"input\"><input type=\"password\" name=\"password\" tabindex=\"2\" /></div></div><div class=\"clearfix\"><label>Cell Phone <small>" + 
-"<a href=\"#\" rel=\"twipsy\" title=\"" + this.escape('Used for SMS Alerts, Security and Account Information') + "\">" + 
-"(why?)</a></small> </label><div class=\"input\"><input placeholder=\"(555) 555-5555\" name=\"cell\" tabindex=\"3\" /></div></div><div class=\"clearfix\"><label>Plan</label><div class=\"input\"><select tabindex=\"4\"><option>Small</option><option selected=\"selected\">Medium</option><option>Large</option><option>X-Large</option><option>Custom</option></select></div></div><div style=\"margin-bottom:0px\" class=\"clearfix\"><label>Terms Of Service</label><div class=\"inputs\"><ul class=\"inputs-list\"><li class=\"input\"><label> <input type=\"checkbox\" tabindex=\"5\" /> I have read and agree to the <a href=\"/terms\">Terms of Service</a> </label></li></ul></div></div><div style=\"background:none;border:none;margin-top:0px\" class=\"actions\"><button type=\"submit\" value=\"Create Account\" tabindex=\"6\" class=\"btn primary\"><b>Start FREE 30-Day Trial »</b></button><br /><br /><p> <span style=\"font-size:14px\" class=\"label\">Next:</span> Paste one line in your terminal.</p></div></fieldset></form></div><div class=\"clear\"></div></div></div></div></div>\n<script type=\"text/javascript\">\n//<![CDATA[\n$(function(){\n  $('#email').focus();\n})\n//]]>\n</script>\n";
- return _$output;  } catch (e) {
-    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
-  }
-}
-}
-,  "marketing/terms": function anonymous(locals) {
-with(locals || {}) {
-  try {
-   var _$output="<div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container\"><div class=\"vspace\"></div><div class=\"container main\"><div class=\"row\"><div class=\"span4\">&nbsp;</div><div class=\"span8\"><h1>Terms Of Service</h1>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</div></div><div class=\"vspace\"></div></div></div></div>";
- return _$output;  } catch (e) {
-    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
-  }
-}
-}
-,  "marketing": function anonymous(locals) {
+,  "marketing/layout": function anonymous(locals) {
 with(locals || {}) {
   try {
    var _$output="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
@@ -176,11 +231,82 @@ this.escape(q) +
 this.escape(q) +
 "\"></script><!--[if lt IE 9]>" +
 '<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>' +
-"<![endif]--></head><body class=\"marketing\"><div class=\"topbar\"><div class=\"fill\"><div class=\"container\"><h3><a href=\"/\" style=\"letter-spacing:3px;\"><img src=\"/logotype-small.png\" width=\"52px\" height=\"22px\" /></a></h3><ul><li><a href=\"/features\">Features</a></li><li><b><a href=\"/plans\">Plans & Pricing</a></b></li><li><a href=\"/support\">Support</a></li><li><a href=\"/Documentation\">Documentation</a></li></ul><ul class=\"secondary-nav\"><li><form><input placeholder=\"Email Address\" class=\"username\" /><input placeholder=\"Password\" type=\"password\" class=\"password\" /><a href=\"#toggle\" class=\"login\">Log In</a></form></li><li></li></ul></div></div></div>" +
+"<![endif]--></head><body class=\"marketing\"><div class=\"topbar\"><div class=\"fill\"><div class=\"container\"><h3><a href=\"/\" style=\"letter-spacing:3px;\"><img src=\"/logotype-small.png\" width=\"52px\" height=\"22px\" /></a></h3>" +
+"";if(!this.app.hideCrumbs){; _$output = _$output  +
+"<ul><li><a href=\"/features\">Features</a></li><li><b><a href=\"/plans\">Plans & Pricing</a></b></li><li><a href=\"/support\">Support</a></li><li><a href=\"/Documentation\">Documentation</a></li></ul>" +
+"";}; _$output = _$output  +
+"<ul class=\"secondary-nav\"><li><form><input placeholder=\"Email Address\" class=\"username\" /><input placeholder=\"Password\" type=\"password\" class=\"password\" /><a href=\"#toggle\" class=\"login\">Log In</a></form></li></ul></div></div></div>" +
 content +
 "<center><br /><br />&copy; 2011 <b>X</b>itive, Inc</center>\n<script type=\"text/javascript\">\n//<![CDATA[\n" +
 etc +
 "\nTransitive.boot();\n$(function () {\n  $(\"a[rel=twipsy]\").twipsy({\n    live: false,\n    animate: false\n  })\n})\n//]]>\n</script>\n</body></html>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "marketing/plans": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="";
+this.app.hideCrumbs = true;
+; _$output = _$output  +
+"<div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container\"><div class=\"vspace\"></div><div class=\"container main\"><div class=\"row\"><div class=\"span8\"><div class=\"row\"><div class=\"span8 plans\"><h1>Plans <small>100% SSL. 4 Week data retention.</small> </h1><div class=\"row\"><div class=\"span4\"><h2>Small <div class=\"price\">$49<div class=\"price\">" + 
+this.escape("/mo") + 
+"</div></div> </h2><p><b>4</b> Servers</p></div><div class=\"span4\"><h2>Medium <div class=\"price\">$95<div class=\"price\">" + 
+this.escape("/mo") + 
+"</div></div> </h2><p><b>8</b> Servers</p></div></div><div class=\"vspace\"></div><div class=\"row\"><div class=\"span4\"><h2>Large <div class=\"price\">$195<div class=\"price\">" + 
+this.escape("/mo") + 
+"</div></div> </h2><p><b>18</b> Servers</p></div><div class=\"span4\"><h2>X-Large <div class=\"price\">$495<div class=\"price\">" + 
+this.escape("/mo") + 
+"</div></div> </h2><p><b>50</b> Servers</p></div></div></div></div><div class=\"row\"><div class=\"vspace2\"></div><div class=\"span8\"><div style=\"padding:0 0px\"><h2>Have more than 50 servers?</h2><p> <a href=\"mailto:custom@dxdt.io\">Email Us</a> for volume discounts.</p></div></div></div></div><div class=\"span8\"><form method=\"POST\" action=\"/signup\" autocomplete=\"off\"><fieldset><legend>Monitor Everything<br />in One Minute</legend>" +
+this.render("marketing/signup_fields") +
+"<div style=\"background:none;border:none;margin-top:0px\" class=\"actions\"><button type=\"submit\" value=\"Create Account\" tabindex=\"6\" class=\"btn primary\"><b>Start FREE 30-Day Trial »</b></button><br /><br /><p> <span style=\"font-size:14px\" class=\"label\">Next:</span> Paste one line in your terminal.</p></div></fieldset></form></div><div class=\"clear\"></div></div></div></div></div>\n<script type=\"text/javascript\">\n//<![CDATA[\n$(function(){\n  $('#email').focus();\n})\n//]]>\n</script>\n";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "marketing/signup": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="<div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container\"><div class=\"vspace\"></div><div class=\"container main\"><pre>" + 
+this.escape(JSON.stringify(fields)) + 
+"</pre><form method=\"POST\" action=\"/signup\" autocomplete=\"off\"><fieldset><legend>Please fix the errors below:</legend>" +
+this.render("marketing/signup_fields", {fields: fields, errors: errors }) +
+"<div style=\"background:none;border:none;margin-top:0px\" class=\"actions\"><button type=\"submit\" value=\"Create Account\" tabindex=\"6\" class=\"btn primary\"><b>Start FREE 30-Day Trial »</b></button></div></fieldset></form></div></div></div>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "marketing/signup_fields": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="";locals || (locals={})
+locals.fields || (fields={})
+locals.errors || (errors={})
+
+//avoid passing this stuff in every time.
+this.app.fields = fields
+this.app.errors = errors
+; _$output = _$output  +
+this.render("form/input", {label:"Email address", name: "email", ti: 1, errMsg: " Please enter a valid email"}) +
+this.render("form/input", {label:"Password", name: "password", ti: 2, type:"password", errMsg:"Must be between 4 and 80 letters"}) +
+this.render("form/input", {label:"Cell Phone", name: "cell", ti: 3, tip:'Used for SMS Alerts, Security and Account Information'}) +
+"<div class=\"clearfix\"><label>Plan</label><div class=\"input\"><select tabindex=\"4\">" + 
+this.render("form/options", {options:[["Small", "s1"], ["Medium", "m1"], ["Large", "l1"], ["X-Large", "xl1"], ["Custom", "custom"]] }) + 
+"</select></div></div>" +
+this.render("form/checkbox", {label:"Terms of Service", name: "tos", ti: 5, additionalText: 'I have read and agree to the <a href="/terms">Terms of Service</a>', wrapperStyle:"margin-bottom:0px", errMsg:"You must agree to the TOS to continue."});
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "marketing/terms": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="<div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container\"><div class=\"vspace\"></div><div class=\"container main\"><div class=\"row\"><div class=\"span4\">&nbsp;</div><div class=\"span8\"><h1>Terms Of Service</h1>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</div></div><div class=\"vspace\"></div></div></div></div>";
  return _$output;  } catch (e) {
     return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
   }

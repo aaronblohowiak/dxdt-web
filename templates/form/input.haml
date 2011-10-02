@@ -1,0 +1,20 @@
+- this.render("form/clean_input", locals)
+  
+.clearfix(class=klass)
+  %label=label
+  .input
+    %input#email{name: name, tabindex:ti, value:value, type:type}>
+    :if locals.additionalText
+      != locals.additionalText
+
+    - if(errors){
+    %span.help-inline
+      - if(locals.errMsg){
+      = locals.errMsg
+      - }else{
+      = errors.message          
+      - }      
+    - }
+    :if locals.tip
+      %span.help-block
+        = locals.tip

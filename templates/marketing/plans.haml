@@ -1,5 +1,5 @@
 -
-  this.crumbs = [["", "Features"], ["", "Pricing"], ["", "Contact"], ["", "Documentation"]]
+  this.app.hideCrumbs = true;
 
 .app
 .home
@@ -54,46 +54,13 @@
                   %a(href="mailto:custom@dxdt.io")> Email Us
                   for volume discounts.
         .span8
-          %form(method="POST")
+          %form(method="POST" action="/signup" autocomplete="off")
             %fieldset
               %legend
                 Monitor Everything
                 %br
                 in One Minute
-              .clearfix
-                %label Email address
-                .input
-                  %input#email(name="email" tabindex=1)
-              .clearfix
-                %label Password
-                .input
-                  %input(type="password" name="password" tabindex=2)
-              .clearfix
-                %label
-                  Cell Phone
-                  %small>
-                    %a(href="#" rel="twipsy" title='Used for SMS Alerts, Security and Account Information') (why?)
-                .input
-                  %input(placeholder="(555) 555-5555" name="cell" tabindex=3)
-              .clearfix
-                %label Plan
-                .input
-                  %select(tabindex=4)
-                    %option Small
-                    %option(selected=true) Medium
-                    %option Large
-                    %option X-Large
-                    %option Custom
-              .clearfix(style="margin-bottom:0px")
-                %label
-                  Terms Of Service
-                .inputs
-                  %ul.inputs-list
-                    %li.input
-                      %label
-                        %input(type="checkbox" tabindex=5)>
-                        I have read and agree to the
-                        %a(href="/terms")> Terms of Service
+              != this.render("marketing/signup_fields")
               .actions(style="background:none;border:none;margin-top:0px")
                 %button.btn.primary(type="submit" value="Create Account" tabindex=6)
                   %b Start FREE 30-Day Trial »                

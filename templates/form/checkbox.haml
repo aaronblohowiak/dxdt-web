@@ -1,0 +1,25 @@
+- if(!locals.type) locals.type="checkbox"
+- this.render("form/clean_input", locals)
+  
+.clearfix(class=klass style=wrapperStyle)
+  %label
+    = label
+  .inputs
+    %ul.inputs-list
+      %li.input
+        %label
+          %input#email{name: name, tabindex:ti, value:"on", type:type}>
+          :if locals.additionalText
+            != locals.additionalText
+
+        - if(errors){
+        %span.help-inline
+          - if(locals.errMsg){
+          = locals.errMsg
+          - }else{
+          = errors.message     
+          - }      
+        - }
+        :if locals.tip
+          %span.help-block
+            = locals.tip

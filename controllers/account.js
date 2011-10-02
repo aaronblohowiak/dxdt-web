@@ -6,7 +6,7 @@ module.exports = function(routes, Transitive){
   }
   
   status = JSON.parse(fs.readFileSync(Transitive.options.root+"/status.json"));
-  
+
   routes.get("/account", function(req, res){
     renderAccount(res, "account", {status:status});
   });

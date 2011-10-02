@@ -1,0 +1,18 @@
+-
+  if(locals.value===undefined){
+    if(this.app.fields){
+      locals.value = this.app.fields[name];
+    }
+  }
+  if(locals.errors === undefined){
+    if(this.app.errors){
+      locals.errors = this.app.errors[name];
+    }
+  }
+
+  if(locals.value===undefined){locals.value='';}
+  if(locals.errors===undefined){locals.errors=null;}
+  if(!locals.ti){locals.ti=null;}
+  if(!locals.type){locals.type="text";}
+
+  locals.errors ? locals.klass="error" : locals.klass="";

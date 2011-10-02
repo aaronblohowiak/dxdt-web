@@ -30,6 +30,7 @@
           %h3
             %a(href="/" style="letter-spacing:3px;")
               %img(src="/logotype-small.png" width="52px" height="22px")
+          - if(!this.app.hideCrumbs){
           %ul
             %li
               %a(href="/features") Features
@@ -40,13 +41,13 @@
               %a(href="/support") Support
             %li
               %a(href="/Documentation") Documentation
+          - }
           %ul.secondary-nav
             %li
               %form
                 %input.username(placeholder="Email Address")
                 %input.password(placeholder="Password" type="password")
                 %a.login(href="#toggle") Log In
-            %li
     != content
     %center
       %br

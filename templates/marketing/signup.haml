@@ -1,0 +1,16 @@
+.app
+.home
+  .vspace
+  .body.container
+    .vspace
+    .container.main
+        %pre
+          = JSON.stringify(fields)
+      %form(method="POST" action="/signup" autocomplete="off")
+        %fieldset
+          %legend
+            Please fix the errors below:
+          != this.render("marketing/signup_fields", {fields: fields, errors: errors })
+          .actions(style="background:none;border:none;margin-top:0px")
+            %button.btn.primary(type="submit" value="Create Account" tabindex=6)
+              %b Start FREE 30-Day Trial »
