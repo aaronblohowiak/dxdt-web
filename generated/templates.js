@@ -239,7 +239,7 @@ this.escape(q) +
 content +
 "<div class=\"container footer\"><div class=\"vspace\"></div><div class=\"row\"><div class=\"span4 darker\">Got questions? <a href=\"mailto:questions@dxdt.io\"> We're happy to help.</a> </div><div style=\"text-align:center\" class=\"span8 shhhh\">&copy; 2011 <a href=\"http://xitive.com\"><b>X</b>itive</a>, Inc</div><div class=\"span4 shhhh\"> <a href=\"/terms\">Terms of Service</a> &nbsp;&nbsp; <a href=\"/privacy\">Privacy Policy</a> </div></div><div class=\"vspace\"></div></div>\n<script type=\"text/javascript\">\n//<![CDATA[\n" +
 etc +
-"\nTransitive.boot();\n$(function () {\n  $(\"a[rel=twipsy]\").twipsy({\n    live: false,\n    animate: false\n  })\n})\n//]]>\n</script>\n</body></html>";
+"\nTransitive.boot();\n$(function () {\n  $(\"a[rel=twipsy]\").twipsy({\n    live: false,\n    animate: false\n  })\n});\n//]]>\n</script>\n</body></html>";
  return _$output;  } catch (e) {
     return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
   }
