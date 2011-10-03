@@ -184,11 +184,25 @@ html {
 
 
 .home{
+  
+  img.pop {
+    .box-shadow(2px 2px 10px rgba(0,0,0,0.10))
+  }
+
   > .body {
     background-color: #fff;
     border: 1px solid #e5e5e5;
     padding: 0 20px;
     overflow:hidden;
+    .box-shadow(2px 2px 20px rgba(0,0,0,0.25))
+  }
+  
+  > .body.rounded{
+    .border-radius(10px);
+  }
+  
+  > .body.rounded-bottom{
+    .border-radius( 0 0 10px 10px);
   }
   
   p {

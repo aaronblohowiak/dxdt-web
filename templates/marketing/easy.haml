@@ -8,27 +8,39 @@
 .app
 .home
   .vspace
-  .body.container
+  .body.container.rounded
     .vspace
     .container.main
       .row
         .span8
           %h1 Easiest Server Monitoring
-          %h2 One-Minute install:
+          %h2
+            %img(src="/terminal.png" style="vertical-align:top" width="32px" height="32px")> 
+            %b One-Minute install:
           %ul.unstyled
             %li 1. Log In
             %li 2. Click the Environment (dev, production) for the server.
             %li 3. Copy the "Server Setup Command"
-            %li 4. Log in to your server as root and paste the command.
+            %li
+              4. Log in to your server and paste the command.
             %li 5. You're done!
           %p
-            Within a few seconds, you should see your server added to the environment and events added to the
-            %a(href="/event-stream")>event stream.
+            Within a few seconds, you should see your server added to the environment and events added to the <a href="/event-stream">event stream</a>.
+          .vspace
+          .span8(style="text-align:center")
+              %a.btn.primary(href="/plans")
+                %big
+                  %b
+                    Start Your 30-day free trial »
+              %br
+              No Credit Card required.
           
         .span8
-          %h1 No Configuration
+          %h1 &nbsp;
           %h2 Every Process and Port
           %p Just by installing the script, we start monitoring every process and port. You don't have to worry about installing any plugins or changing things as you add more services to a machine; all new services will be picked up automatically.
           %h2(style="margin-top:18px") Automatic API Keys &amp; Security Tokens!
           %p The command you paste into your server downloads a script that is customized for your account and environment.
           %p It includes an API Key and a Security Token <i>inside</i> the script so there is nothing to configure.
+      .vspace2
+      

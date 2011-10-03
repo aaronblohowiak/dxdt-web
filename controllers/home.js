@@ -32,6 +32,10 @@ module.exports = function(routes, Transitive){
     marketing(req, res, "easy");
   });
   
+  routes.get("/process-monitoring", function(req, res){
+    marketing(req, res, "process-monitoring");
+  });
+  
   routes.post("/signup", function(req, res){
     formulate(req, res, function(err, fields, files){
       if(!fields.tos){fields.tos = false;} // stupid checkboxes.

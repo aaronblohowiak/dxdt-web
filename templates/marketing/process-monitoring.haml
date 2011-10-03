@@ -1,0 +1,48 @@
+:css
+  .main ul.unstyled > li{
+    color: #333;
+    font-size:18px;
+    line-height:24px;
+  }
+
+.app
+.home
+  .vspace
+  .body.container.rounded
+    .vspace
+    .container.main
+      .row
+        .span8
+          %h1 Process Monitoring
+          %h2
+            For every process on the machine see:
+          %ul.unstyled
+            %li 1. Open TCP Ports
+            %li 2. CPU Usage (%, Sys, User).
+            %li 3. RAM Usage (%, Virtual Size, Resident Size)
+            %li 4. The command used to start the program
+            %li 5. The time the process started
+            %li 6. The time the process ended
+          %p(style="color:#444")
+            Using dxdt is like having a searchable, graphed version of `top` that works across all of your machines. You can monitor your systems for performance problems, plan capacity, and perform a root cause analysis faster and easier than anything else. <a href="/plans">Try dxdt</a> and see for yourself.
+          .vspace
+          .row
+            .span8(style="text-align:center")
+                %a.btn.primary(href="/plans")
+                  %big
+                    %b
+                      Start Your 30-day FREE trial »
+                %br
+                No Credit Card required.
+          .vspace2
+          %h2
+            Search All Processes
+            %small> Even terminated ones!
+          
+          %p `pgrep` is a command that lets you find a currently running process' pid by regular expression.
+          %p With dxdt, you can use regular expressions to search through all of your currently running processes and all of the processes that have terminated in the last 4 weeks.  Then, you can click on the name of the process and see its detailed performance history.
+          
+        .span8
+          %h1 &nbsp;
+          %img.pop(src="/process-monitoring.png" width="460px")
+      .vspace
