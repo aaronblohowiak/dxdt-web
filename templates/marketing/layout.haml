@@ -38,9 +38,7 @@
               %b
                 %a(href="/plans") Plans & Pricing
             %li
-              %a(href="/support") Support
-            %li
-              %a(href="/Documentation") Documentation
+              %a(href="mailto:aaron@dxdt.io") Support
           - }
           %ul.secondary-nav
             %li
@@ -49,10 +47,24 @@
                 %input.password(placeholder="Password" type="password")
                 %a.login(href="#toggle") Log In
     != content
-    %center
-      %br
-      %br
-      &copy; 2011 <b>X</b>itive, Inc
+    .container.footer
+      .vspace
+      .row
+        .span4.darker
+          Got questions? <a href="mailto:questions@dxdt.io"> We're happy to help.</a> 
+        .span8.shhhh(style="text-align:center")
+          &copy; 2011 
+          %a(href="http://xitive.com")
+            <b>X</b>itive
+          , Inc
+        .span4.shhhh
+          %a(href="/terms")>
+            Terms of Service
+          &nbsp;&nbsp;
+          %a(href="/privacy")>
+            Privacy Policy
+          
+      .vspace
     :script
       !{etc}
       Transitive.boot();

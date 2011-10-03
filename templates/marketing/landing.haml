@@ -61,7 +61,7 @@
                 %a(href="/process-monitoring")> Monitor every process
                  by default. No plugins needed.
               %p
-                %a(href="/process-monitoring#terminated")> Search old processes
+                %a(href="/process-monitoring#terminated")> Search exited processes
                 for root cause analysis.
             .span4
               %div(style="padding:0 0px")
@@ -74,15 +74,21 @@
               %h2 Every Machine
               %p
                 %a(href="/system-monitoring")> System monitoring
-                for Load Avg, Disk, RAM and more.
-              %p Every page has an easy ssh link for the current machine.
+                for Load, Disk Usage, RAM and more.
+              %p
+                Drill deeper, inspecting
+                %a(href="/process-monitoring")> processes
+                and
+                %a(href="/port-monitoring")> ports.
             .span4
               %h2 Every Event
               %p
                 The
                 %a(href="/event-streams")> event-streams
                 are "Twitter for servers".
-              %p Add your own notes to any graph or server.
+              %p
+                %a(href="/event-streams#notes")> Add your own notes
+                to any graph or server.
           .vspace2
       .row.call-to-action(style="text-align:center")
         .span4

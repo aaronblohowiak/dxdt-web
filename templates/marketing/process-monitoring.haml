@@ -1,8 +1,12 @@
 :css
-  .main ul.unstyled > li{
+  .main ul > li{
     color: #333;
     font-size:18px;
     line-height:24px;
+  }
+  
+  .main p{
+    color:#444
   }
 
 .app
@@ -16,14 +20,14 @@
           %h1 Process Monitoring
           %h2
             For every process on the machine see:
-          %ul.unstyled
-            %li 1. Open TCP Ports
-            %li 2. CPU Usage (%, Sys, User).
-            %li 3. RAM Usage (%, Virtual Size, Resident Size)
-            %li 4. The command used to start the program
-            %li 5. The time the process started
-            %li 6. The time the process ended
-          %p(style="color:#444")
+          %ul
+            %li Open TCP Ports
+            %li CPU Usage (%, Sys, User).
+            %li RAM Usage (%, Virtual Size, Resident Size)
+            %li The command used to start the program
+            %li When the process started
+            %li When the process ended
+          %p
             Using dxdt is like having a searchable, graphed version of `top` that works across all of your machines. You can monitor your systems for performance problems, plan capacity, and perform a root cause analysis faster and easier than anything else. <a href="/plans">Try dxdt</a> and see for yourself.
           .vspace
           .row
@@ -35,14 +39,21 @@
                 %br
                 No Credit Card required.
           .vspace2
-          %h2
-            Search All Processes
-            %small> Even terminated ones!
+          %h2(id="terminated")
+            Search Terminated Processes
           
-          %p `pgrep` is a command that lets you find a currently running process' pid by regular expression.
-          %p With dxdt, you can use regular expressions to search through all of your currently running processes and all of the processes that have terminated in the last 4 weeks.  Then, you can click on the name of the process and see its detailed performance history.
+          %p
+            %a(href="http://en.wikipedia.org/wiki/Pgrep")>pgrep
+            is a command that lets you find the pid for a currently running process by regular expression.
+          %p With dxdt, you can use regular expressions to search through all of your currently running processes and all of the processes that have terminated in the last 4 weeks.
+          %p Click on the name of a process and you'll see its detailed performance history. You can drill down, compare, and annotate graphs for the <b>fastest</b> root cause analysis.
+          %p
+            <a href="/plans">Start collecting data now</a>.
           
         .span8
           %h1 &nbsp;
-          %img.pop(src="/process-monitoring.png" width="460px")
+          %img.pop(src="/process-monitoring.png" width="459px" height="507px")
+          .vspace2
+          %center
+            Whoops!  This is just a placeholder image for now while we're in Beta.
       .vspace

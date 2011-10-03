@@ -2469,10 +2469,16 @@ html {
   -moz-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
 }
+.container.footer .shhhh a:link, .container.footer .shhhh a:visited {
+  color: #808080;
+}
+.container.footer .darker {
+  color: #404040;
+}
 .home img.pop {
-  -webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }
 .home > .body {
   background-color: #fff;
