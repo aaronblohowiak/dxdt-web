@@ -15,20 +15,29 @@
   .body.container.rounded
     .vspace
     .container.main
+      %h1
+        Process Monitoring
+        %small(style="color:#666")> 100% Automatic: No Configuration.
+        
+    
       .row
         .span8
-          %h1 Process Monitoring
           %h2
             For every process on the machine see:
           %ul
-            %li Open TCP Ports
+            %li Open 
+              %a(href="/port-monitoring")>TCP Ports
             %li RAM & CPU Usage
             %li The command used to start the program
-            %li When the process started, and
-            %li When the process ended
+            %li When the process started, and ended
+            %li
+              %a(href="/event-stream")> Critical events
+              and custom notes.
           %p
-            Using dxdt is like having a searchable, graphed version of `top` that works across all of your machines. You can monitor your systems for performance problems, plan capacity, and perform a root cause analysis faster and easier than anything else. <a href="/plans">Try dxdt</a> and see for yourself.
-          .vspace
+            Using dxdt is like having a searchable, graphed version of `top` that works across all of your machines. You can monitor your systems for performance problems, plan capacity, and
+            %span.highlight> perform a root cause analysis faster and easier than anything else.
+            <a href="/plans">Try dxdt</a> and see for yourself.
+          .vspace2
           .row
             .span8(style="text-align:center")
                 %a.btn.primary(href="/plans")

@@ -41,7 +41,7 @@
           %h3
             %a(href="/" style="letter-spacing:3px;")
               %img(src="/logotype-small.png" width="52px" height="22px")
-          - if(!this.app.hideCrumbs){
+          - if(!this.app.hideTopNav){
           %ul
             %li
               %a(href="/features") Features
@@ -50,13 +50,14 @@
                 %a(href="/plans") Plans & Pricing
             %li
               %a(href="mailto:support@dxdt.io") Support
-          - }
           %ul.secondary-nav
             %li
               %form
                 %input.username(placeholder="Email Address")
                 %input.password(placeholder="Password" type="password")
                 %a.login(href="#toggle") Log In
+          - }
+          
     != content
     .container.footer
       .vspace
@@ -65,9 +66,8 @@
           Got questions? <a href="mailto:questions@dxdt.io"> We're happy to help.</a> 
         .span8.shhhh(style="text-align:center")
           &copy; 2011 
-          %a(href="http://xitive.com")
-            <b>X</b>itive
-          , Inc
+          %a(href="http://xitive.com")>
+            <b>X</b>itive Inc
         .span4.shhhh
           %a(href="/terms")>
             Terms of Service

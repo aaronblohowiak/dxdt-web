@@ -1,0 +1,61 @@
+:css
+  .main ul > li{
+    color: #333;
+    font-size:18px;
+    line-height:36px;
+    
+  }
+  
+  .main p{
+    color:#444
+  }
+
+.app
+.home
+  .vspace
+  .body.container.rounded
+    .vspace
+    .container.main
+      %h1
+        Port Monitoring
+        %small(style="color:#666")> 100% Automatic: No Configuration.
+    
+      .row
+        .span8
+          %h2
+            Every open TCP port on every machine.
+          %p Port monitoring tells you:
+          %ul
+            %li What process is listening on which port
+            %li When was the Port was opened
+            %li Which host the port is bound to
+          %p
+            
+          .vspace
+          .row
+            .span8(style="text-align:center")
+                %a.btn.primary(href="/plans")
+                  %big
+                    %b
+                      Start Your 30-day FREE trial »
+                %br
+                No Credit Card required.
+          .vspace2
+          
+        .span8
+          
+          %h2 Other Features:
+          %ul
+            %li
+              %a(href="/process-monitoring")> Process Monitoring
+              tracks the RAM and CPU usage of every process on the machine.
+            %li
+              %a(href="/system-monitoring")> System Monitoring
+              watches the Load, disk space and
+            %li
+              %a(href="/event-stream")> Event Streaming
+              shows you what is happening at a high level, like Twitter for servers.
+              
+          %center
+            %p
+              <a href="/plans">Start collecting data now  »</a>

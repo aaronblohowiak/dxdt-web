@@ -2558,7 +2558,12 @@ html {
   overflow: auto;
 }
 .grayblock {
-  background-color: #f0f0f0;
+  background-repeat: no-repeat;
+  background-image: -moz-radial-gradient(85% 50%, contain, #ffffff, #f0f0f0 100%);
+  background-image: -webkit-radial-gradient(85% 50%, contain, #ffffff, #f0f0f0 100%);
+  background-image: -o-radial-gradient(85% 50%, contain, #ffffff, #f0f0f0 100%);
+  background-image: -ms-radial-gradient(85% 50%, contain, #ffffff, #f0f0f0 100%);
+  background-image: radial-gradient(85% 50%, contain, #ffffff, #f0f0f0 100%);
   width: 940px;
   padding: 20px;
   color: #404040;
@@ -2591,7 +2596,7 @@ html {
   background-color: #FFA;
   color: black;
 }
-.highlighter {
+.highlight {
   background-color: #FFA;
   color: black;
 }
