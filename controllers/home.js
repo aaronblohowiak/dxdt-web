@@ -20,25 +20,19 @@ module.exports = function(routes, Transitive){
   routes.get("/", home);
   routes.get("/index.html", home);
 
-  routes.get("/plans", function(req, res){
-    marketing(req, res, "plans");
-  });
-  
-  routes.get("/terms", function(req, res){
-    marketing(req, res, "terms");
-  });
+  var ary = "plans terms process-monitoring port-monitoring system-monitoring".split(" ");
+  ary.forEach(function(str){
+    routes.get("/"+str, function(req, res){
+      marketing(req, res, str);
+    });
+  })
+
+
   
   routes.get("/easiest-server-monitoring", function(req, res){
     marketing(req, res, "easy");
   });
   
-  routes.get("/process-monitoring", function(req, res){
-    marketing(req, res, "process-monitoring");
-  });
-  
-  routes.get("/port-monitoring", function(req, res){
-    marketing(req, res, "port-monitoring");
-  });
   
   routes.post("/signup", function(req, res){
     formulate(req, res, function(err, fields, files){

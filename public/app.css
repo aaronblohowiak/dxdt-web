@@ -2559,6 +2559,7 @@ html {
 }
 .grayblock {
   background-repeat: no-repeat;
+  background-color: #f0f0f0;
   background-image: -moz-radial-gradient(85% 50%, contain, #ffffff, #f0f0f0 100%);
   background-image: -webkit-radial-gradient(85% 50%, contain, #ffffff, #f0f0f0 100%);
   background-image: -o-radial-gradient(85% 50%, contain, #ffffff, #f0f0f0 100%);

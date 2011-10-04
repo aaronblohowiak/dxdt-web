@@ -221,6 +221,7 @@
 #gradient {
   .radial(@x: 50%, @y:50%, @startColor:#FFF, @endColor:#000, @blur:50%) {
     background-repeat: no-repeat;
+    background-color: @endColor;
     background-image: -moz-radial-gradient(@x @y,  contain, @startColor, @endColor @blur);
     background-image: -webkit-radial-gradient(@x @y,  contain, @startColor, @endColor @blur);
     background-image: -o-radial-gradient(@x @y,  contain, @startColor, @endColor @blur);
