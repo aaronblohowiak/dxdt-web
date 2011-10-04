@@ -20,7 +20,7 @@ module.exports = function(routes, Transitive){
   routes.get("/", home);
   routes.get("/index.html", home);
 
-  var ary = "plans terms process-monitoring port-monitoring system-monitoring".split(" ");
+  var ary = "plans terms process-monitoring port-monitoring system-monitoring features".split(" ");
   ary.forEach(function(str){
     routes.get("/"+str, function(req, res){
       marketing(req, res, str);
