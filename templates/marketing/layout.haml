@@ -55,10 +55,13 @@
               %a(href="mailto:support@dxdt.io") Support
           %ul.secondary-nav
             %li
-              %form
-                %input.username(placeholder="Email Address")
-                %input.password(placeholder="Password" type="password")
-                %a.login(href="#toggle") Log In
+              %form(action="/login" method="POST" id="login-form") 
+                %input.username(placeholder="Email Address" name="email")
+                %input.password(placeholder="Password" type="password" name="password")
+                %a.login(href="#" onclick="$('#login-form').submit()") Log In
+                / we need this for enter to 'just work'
+                %div(style="position:absolute; left:-99999px")
+                  %input(type="submit") log in
           - }
           
     != content

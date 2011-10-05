@@ -1,4 +1,7 @@
 fs = require("fs");
+var formulate = require("formulate");
+var passwords = require("../lib/passwords.js");
+
 
 module.exports = function(routes, Transitive){
   function renderAccount(res, template, locals){
@@ -26,5 +29,16 @@ module.exports = function(routes, Transitive){
   
   routes.get("/process", function(req, res){
     renderAccount(res, "process", {status:status});
+  });
+  
+  routes.post("/login", function(req, res){
+    var hsh = "$2a$10$hbmTGDv4/WjRzXyuBuC25ucFORCd/jB8XnxOS25RwV941HE1NiPxq";
+    formulate(req, res, function(err, fields){
+      console.log(fields)
+          passwords.check(fields.password, hsh, function(err, matches){
+            if(err) return console.log(err);
+            res.end(JSON.stringify(matches));
+          });
+    }, 10);
   });
 };

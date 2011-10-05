@@ -2,6 +2,7 @@ var client = require("redis").createClient();
 var formulate = require("formulate");
 
 var Valid = require("../lib/valid.js");
+var passwords = require("../lib/passwords.js");
 
 module.exports = function(routes, Transitive){
   
@@ -25,7 +26,7 @@ module.exports = function(routes, Transitive){
     routes.get("/"+str, function(req, res){
       marketing(req, res, str);
     });
-  })
+  });
 
 
   
@@ -41,9 +42,14 @@ module.exports = function(routes, Transitive){
       var errors = userValid.test(fields);
       if(errors){
         return marketing(req, res, "signup", {fields: fields, errors: errors});
+      }else{
+        passwords.toHash(fields.password, function(err, hsh){
+          res.writeHead(200, { 
+            'Content-Type': 'text/plain'
+          });
+          res.end(hsh);
+        });
       }
-      
-      
       
       //check if email already exists
       //verify that plan is valid planId

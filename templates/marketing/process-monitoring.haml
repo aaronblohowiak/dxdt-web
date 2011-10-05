@@ -18,23 +18,31 @@
       %h1
         Process Monitoring
         %small(style="color:#666")> 100% Automatic: No Configuration.
-        
-    
+      
+      
+
       .row
         .span8
-          %h2
-            For every process on the machine see:
+          %p
+            %span.highlight dxdt is like a searchable, graphed version of `top` that works across all of your machines
+            
+        
+          %h3
+            For every process on the machine, you'll see:
           %ul
-            %li Open 
-              %a(href="/port-monitoring")>TCP Ports
             %li RAM & CPU Usage
-            %li The command used to start the program
-            %li When the process started, and ended
+            %li
+              The 
+              %a(href="/port-monitoring")>TCP Ports
+              this process is listening on
             %li
               %a(href="/event-stream")> Critical events
               and custom notes.
+            %li The command-line options used to start the program
+            %li When the process started and ended
+
           %p
-            Using dxdt is like having a searchable, graphed version of `top` that works across all of your machines. You can monitor your systems for performance problems, plan capacity, and
+            You can monitor your systems for performance problems, plan capacity, and
             %span.highlight> perform a root cause analysis faster and easier than anything else.
             <a href="/plans">Try dxdt</a> and see for yourself.
           .vspace2
@@ -50,20 +58,17 @@
           %h2(id="terminated")
             Search Terminated Processes
           
-          %p
-            %a(href="http://en.wikipedia.org/wiki/Pgrep" target="_blank" rel="nofollow")>pgrep
-            is a command-line tool that lets you find the pid for a currently running process by regular expression.
           %p With dxdt, you can use regular expressions to search through all your currently running processes and all processes that have terminated within the last 4 weeks.
           %p Click on the name of a process and you'll see its detailed performance history. You can drill down, compare, and annotate graphs for the <b>fastest</b> root cause analysis.
           
         .span8
-          %h1 &nbsp;
+          %br
+          %br
           %img.pop(src="/process-monitoring.png" width="459px" height="507px")
           .vspace2
           %center
             This is just a placeholder image for now while we're in Beta.
-            .vspace2
             .vspace
             %p
-              <a href="/plans">Start collecting data now  »</a>
-      .vspace
+              <a href="/plans">Start your FREE 30-day trial  »</a>
+      .vspace2
