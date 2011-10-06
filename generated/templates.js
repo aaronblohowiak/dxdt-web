@@ -200,6 +200,15 @@ with(locals || {}) {
   }
 }
 }
+,  "marketing/event-streams": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="<style type=\"text/css\">\n.main ul.unstyled > li{\n  color: #333;\n  font-size:18px;\n  line-height:24px;\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><div class=\"row\"><div class=\"span16\"><h1>Event Streams</h1><div class=\"vspace\"></div><p>We're still in private Beta.  More details about event streams coming soon.</p><p>In the meantime, check out our other <a href=\"/features\">features.</a> This is the only blank page, promise!</p><div class=\"vspace\"></div></div></div><div class=\"vspace2\"></div></div></div></div>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
 ,  "marketing/features": function anonymous(locals) {
 with(locals || {}) {
   try {
@@ -255,7 +264,18 @@ etc +
   }
 }
 }
-,  "marketing/plans": function anonymous(locals) {
+,  "marketing/notify": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="<style type=\"text/css\">\n.main ul.unstyled > li{\n  color: #333;\n  font-size:18px;\n  line-height:24px;\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><div class=\"row\"><div class=\"span16\"><h1>Thanks!</h1><h2>We'll be in touch.</h2><p>To confirm, your email address is: <span class=\"highlight\">" +
+this.escape(email) +
+".</span> </p><p>If this isn't right, just <a href=\"/plans\">sign up again</a>.</p></div></div><div class=\"vspace2\"></div></div></div></div>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "marketing/plans-real": function anonymous(locals) {
 with(locals || {}) {
   try {
    var _$output="";
@@ -272,6 +292,30 @@ this.escape("/mo") +
 "</div></div> </h2><p><b>50</b> Servers</p></div></div></div></div><div class=\"row\"><div class=\"vspace2\"></div><div class=\"span8\"><div style=\"padding:0 0px\"><h2>Have more than 50 servers?</h2><p>We offer  <a href=\"mailto:custom@dxdt.io\">volume discounts.</a> </p></div></div></div></div><div class=\"span8\"><form method=\"POST\" action=\"/signup\" autocomplete=\"off\"><fieldset><legend>Monitor Everything<br />in One Minute</legend>" +
 this.render("marketing/signup_fields") +
 "<div style=\"background:none;border:none;margin-top:0px\" class=\"actions\"><button type=\"submit\" value=\"Create Account\" tabindex=\"6\" class=\"btn primary\"><b>Start FREE 30-Day Trial »</b></button><br /><br /><p> <span style=\"font-size:14px\" class=\"label\">Next:</span> Paste one line in your terminal.</p></div></fieldset></form></div></div><div class=\"row\"><div class=\"grayblock\"><h3>If you have any questions, please <a href=\"mailto:questions@dxdt.io\">email us</a> or call (877) 250-4337</h3></div><div class=\"vspace2\"></div><div class=\"span16\"><div class=\"row\"><div class=\"span8\"><h3>How does the 30-day trial work?</h3>Sign up and start monitoring servers.  A couple weeks before the end of your trial, we'll politely ask you to enter your billing information and you will be billed on the day after your trial ends for the following month.  If for some reason we aren't a good fit, then we'll put your account on hold until further notice.  If you get busy and forget to put in all your info, we have a grace period so you won't lose any data.<div class=\"vspace\"></div><h3>When will I be billed?</h3>You will be billed the day after your trial ends for the following month. You will be billed every month thereafter.<div class=\"vspace\"></div><h3>Do you take American Express?</h3>Yep.  We accept Visa, MasterCard, AmEx, and Discover. After you log in, you can add your card using the \"Account\" link at the top right of the page.  If none of these options work for you, we can accept check, purchase order and <a href=\"http://en.wikipedia.org/wiki/Fictional_currency\" target=\"_blank\">gold-pressed latinum</a> by special arrangement only. You may pay via check if you pre-pay for a year in advance. To pay via check, please <a href=\"mailto:payment@dxdt.io\">email us.</a></div><div class=\"span8\"><h3>What if I add more servers than my plan?</h3>If you start monitoring more servers than are in your plan, we'll politely email you and ask you to upgrade.  Don't worry! You won't lose any data or face any crazy fees.  We do business like people should.<div class=\"vspace\"></div><h3>Do you offer performance consulting?</h3>Yes, professional services are available starting at $150<span class=\"unit\">/hr.</span>  We can help you install, analyze your data, plan capacity, configure servers and advise you on best-practices.<div class=\"vspace\"></div><h3>Is there a minimum commitment?</h3>There is no long-term obligation; dxdt is a month-to-month service.  If you cancel, you will not be billed again.<div class=\"vspace\"></div><h3>Do you support Windows?</h3>Not yet. Please <a href=\"mailto:windows@dxdt.io\">email us</a> and we'll tell you when we add windows support.</div></div><div class=\"vspace2\"></div></div></div></div></div></div>\n<script type=\"text/javascript\">\n//<![CDATA[\n$(function(){\n  $('#email').focus();\n})\n//]]>\n</script>\n";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "marketing/plans": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="";
+this.app.hideTopNav = true;
+; _$output = _$output  +
+"<div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><div class=\"row\"><div class=\"span8\"><div class=\"row\"><div class=\"span8 plans\"><h1>Plans <small>100% SSL. 4 Week data retention.</small> </h1><div class=\"row\"><div class=\"span4\"><h2>Small <div class=\"price\">$49<div class=\"price\">" + 
+this.escape("/mo") + 
+"</div></div> </h2><p><b>4</b> Servers</p></div><div class=\"span4\"><h2>Medium <div class=\"price\">$95<div class=\"price\">" + 
+this.escape("/mo") + 
+"</div></div> </h2><p><b>8</b> Servers</p></div></div><div class=\"vspace\"></div><div class=\"row\"><div class=\"span4\"><h2>Large <div class=\"price\">$195<div class=\"price\">" + 
+this.escape("/mo") + 
+"</div></div> </h2><p><b>18</b> Servers</p></div><div class=\"span4\"><h2>X-Large <div class=\"price\">$495<div class=\"price\">" + 
+this.escape("/mo") + 
+"</div></div> </h2><p><b>50</b> Servers</p></div></div></div></div><div class=\"row\"><div class=\"vspace2\"></div><div class=\"span8\"><div style=\"padding:0 0px\"><h2>Have more than 50 servers?</h2><p>We offer  <a href=\"mailto:custom@dxdt.io\">volume discounts.</a> </p></div></div></div></div><div class=\"span8\"><form method=\"POST\" action=\"/notify\"><h1>Currently In Private Beta</h1><fieldset><legend>Keep in touch.</legend>" +
+this.render("form/input", {label:"Email address", name: "email", ti: 1, errMsg: " Please enter a valid email"}) +
+this.render("form/checkbox", {label:"Request Invite", name: "invite", ti: 2, additionalText: 'I would like to have early access to dxdt', wrapperStyle:"margin-bottom:0px"}) +
+this.render("form/checkbox", {label:"Request Notification", name: "invite", ti: 2, additionalText: 'I would like an email when you launch.', wrapperStyle:"margin-bottom:0px"}) +
+"<div style=\"background:none;border:none;margin-top:0px;text-align:left\" class=\"actions\"><button type=\"submit\" value=\"Create Account\" tabindex=\"6\" class=\"btn primary\"><b>Sign Up »</b></button><br /><br />We won't sell or abuse your email address.           </div></fieldset></form></div></div><div class=\"row\"><div class=\"grayblock\"><h3>If you have any questions, please <a href=\"mailto:questions@dxdt.io\">email us</a> or call (877) 250-4337</h3></div><div class=\"vspace2\"></div><div class=\"span16\"><div class=\"row\"><div class=\"span8\"><h3>How does the 30-day trial work?</h3>Sign up and start monitoring servers.  A couple weeks before the end of your trial, we'll politely ask you to enter your billing information and you will be billed on the day after your trial ends for the following month.  If for some reason we aren't a good fit, then we'll put your account on hold until further notice.  If you get busy and forget to put in all your info, we have a grace period so you won't lose any data.<div class=\"vspace\"></div><h3>When will I be billed?</h3>You will be billed the day after your trial ends for the following month. You will be billed every month thereafter.<div class=\"vspace\"></div><h3>Do you take American Express?</h3>Yep.  We accept Visa, MasterCard, AmEx, and Discover. After you log in, you can add your card using the \"Account\" link at the top right of the page.  If none of these options work for you, we can accept check, purchase order and <a href=\"http://en.wikipedia.org/wiki/Fictional_currency\" target=\"_blank\">gold-pressed latinum</a> by special arrangement only. You may pay via check if you pre-pay for a year in advance. To pay via check, please <a href=\"mailto:payment@dxdt.io\">email us.</a></div><div class=\"span8\"><h3>What if I add more servers than my plan?</h3>If you start monitoring more servers than are in your plan, we'll politely email you and ask you to upgrade.  Don't worry! You won't lose any data or face any crazy fees.  We do business like people should.<div class=\"vspace\"></div><h3>Do you offer performance consulting?</h3>Yes, professional services are available starting at $150<span class=\"unit\">/hr.</span>  We can help you install, analyze your data, plan capacity, configure servers and advise you on best-practices.<div class=\"vspace\"></div><h3>Is there a minimum commitment?</h3>There is no long-term obligation; dxdt is a month-to-month service.  If you cancel, you will not be billed again.<div class=\"vspace\"></div><h3>Do you support Windows?</h3>Not yet. Please <a href=\"mailto:windows@dxdt.io\">email us</a> and we'll tell you when we add windows support.</div></div><div class=\"vspace2\"></div></div></div></div></div></div>\n<script type=\"text/javascript\">\n//<![CDATA[\n$(function(){\n  $('#email').focus();\n})\n//]]>\n</script>\n";
  return _$output;  } catch (e) {
     return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
   }

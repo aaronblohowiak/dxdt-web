@@ -1,12 +1,14 @@
 var exec = require('child_process').exec;
 
+var accounts = require("redis").createClient(1337);
+
 var Transitive = new (require("transitive"))();
 
 var options = {};
 
 //for nginx gzipping
 var mime = require("mime");
-mime.extensions["js"]="text/javascript";
+mime.extensions.js = "text/javascript";
 
 
 if(process.env["NODE_ENV" == "production"]){
@@ -20,6 +22,8 @@ if(process.env["NODE_ENV" == "production"]){
 })();
 
 
-Transitive.App = {};
+Transitive.App = {
+  accountsClient: accounts
+};
 
 console.log("Server started. listening on port " + Transitive.server.address().port);

@@ -1,8 +1,9 @@
-var client = require("redis").createClient();
 var formulate = require("formulate");
 
 var Valid = require("../lib/valid.js");
 var passwords = require("../lib/passwords.js");
+
+var exec = require("child_process").exec;
 
 module.exports = function(routes, Transitive){
   
@@ -21,7 +22,7 @@ module.exports = function(routes, Transitive){
   routes.get("/", home);
   routes.get("/index.html", home);
 
-  var ary = "plans terms process-monitoring port-monitoring system-monitoring features".split(" ");
+  var ary = "plans terms process-monitoring port-monitoring system-monitoring features event-streams".split(" ");
   ary.forEach(function(str){
     routes.get("/"+str, function(req, res){
       marketing(req, res, str);
@@ -34,6 +35,18 @@ module.exports = function(routes, Transitive){
     marketing(req, res, "easy");
   });
   
+  routes.post("/notify", function(req, res){
+    formulate(req, res, function(err, fields, files){
+      marketing(req, res, "notify", fields);
+      Transitive.App.accountsClient.lpush("marketing/notify-me", JSON.stringify(fields));
+      var cmd = "bash "+__dirname+"/../new_signup.sh "+fields.email;
+      console.log(cmd)
+      exec(cmd, function(err, stderr, stdout){
+        console.log(err);
+        console.log(stderr);
+      });
+    }, 10);
+  });
   
   routes.post("/signup", function(req, res){
     formulate(req, res, function(err, fields, files){

@@ -54,21 +54,21 @@
                   We offer 
                   %a(href="mailto:custom@dxdt.io")> volume discounts.
         .span8
-          %form(method="POST" action="/notify")
-            %h1 Currently In Private Beta
+          %form(method="POST" action="/signup" autocomplete="off")
             %fieldset
               %legend
-                Keep in touch.
-              != this.render("form/input", {label:"Email address", name: "email", ti: 1, errMsg: " Please enter a valid email"})
-              != this.render("form/checkbox", {label:"Request Invite", name: "invite", ti: 2, additionalText: 'I would like to have early access to dxdt', wrapperStyle:"margin-bottom:0px"})
-              != this.render("form/checkbox", {label:"Request Notification", name: "invite", ti: 2, additionalText: 'I would like an email when you launch.', wrapperStyle:"margin-bottom:0px"})
-              .actions(style="background:none;border:none;margin-top:0px;text-align:left")
+                Monitor Everything
+                %br
+                in One Minute
+              != this.render("marketing/signup_fields")
+              .actions(style="background:none;border:none;margin-top:0px")
                 %button.btn.primary(type="submit" value="Create Account" tabindex=6)
-                  %b Sign Up »
+                  %b Start FREE 30-Day Trial »                
                 %br
-                %br
-                We won't sell or abuse your email address.           
-
+                %br              
+                %p
+                  %span.label(style="font-size:14px")> Next:
+                  Paste one line in your terminal.
       .row
         .grayblock
           %h3 If you have any questions, please <a href="mailto:questions@dxdt.io">email us</a> or call (877) 250-4337
