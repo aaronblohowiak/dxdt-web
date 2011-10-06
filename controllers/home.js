@@ -39,8 +39,8 @@ module.exports = function(routes, Transitive){
     formulate(req, res, function(err, fields, files){
       marketing(req, res, "notify", fields);
       Transitive.App.accountsClient.lpush("marketing/notify-me", JSON.stringify(fields));
-      var cmd = "bash "+__dirname+"/../new_signup.sh "+fields.email;
-      console.log(cmd)
+      var cmd = "bash "+__dirname+"/../new_signup.sh "+escape(fields.email);
+      console.log(cmd);
       exec(cmd, function(err, stderr, stdout){
         console.log(err);
         console.log(stderr);
