@@ -11,7 +11,8 @@ module.exports = function(routes, Transitive){
     if(!locals){ locals={}; }
     
     res.writeHead(200, { 
-      'Content-Type': 'text/html'
+      'Content-Type': 'text/html',
+      "Strict-Transport-Security": "max-age=604800"
     });
     
     res.end(Transitive.Views.renderPage("marketing/"+page,locals,"marketing/layout"));
