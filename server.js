@@ -19,7 +19,10 @@ if(process.env["NODE_ENV"] == "production"){
   
   var parse = require('url').parse;
   require("http").createServer(function(req, res){
-     res.writeHead(301, {'Content-Type': 'text/plain', 'Location':'https://'+req.headers.host+req.url});
+     res.writeHead(301, {
+       'Content-Type': 'text/plain', 
+       'Location':'https://'+req.headers.host+req.url,
+       "Strict-Transport-Security": "max-age=604800"});
      res.end('Redirecting to SSL\n');
   }).listen(80);
   
