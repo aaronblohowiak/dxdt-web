@@ -6,7 +6,7 @@
     "restartr": ""
   },
   "dependencies": {
-    "transitive": "0.0.0pre30",
+    "transitive": "0.0.0pre31",
     "whiskey": "~0.3.3",
     "haml": "~0.4.2",
     "underscore": "~1.1.6",
