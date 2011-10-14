@@ -1,0 +1,11 @@
+.login-box
+  %h2 Please Log In
+  Your session may have timed out.
+  .vspace
+  %form.form-stacked(action="/login" method="POST")
+    != this.render("form/input", {label:"Email", name: "email", ti: 1, errMsg: " Please enter a valid email"})
+    != this.render("form/input", {label:"Password", name: "password", ti: 2, type:"password", errMsg:"Must be between 4 and 80 letters"})
+    &nbsp;
+    %input.btn.primary.large(type="submit" value="Log In" tabindex="3")
+
+    

@@ -1,0 +1,37 @@
+-
+  this.crumbs = ["Account", "First Visit"]
+
+.row
+  .span12
+    %h1 Start Monitoring
+    %p(style="font-size:16px") Paste the command in your server's terminal, after logging in as 
+      %span.highlight> root.
+      %br
+    
+    .vspace
+    %h2 Development
+    %input.terminal(value="curl -l https://kjh353kjh531:j3nkj15n3kj@dxdt.io/dxdtd | bash")
+        
+    .vspace
+    %h2 Staging
+    %input.terminal(value="curl -l https://kjh353kjh531:vjnk33k5jnk@dxdt.io/dxdtd | bash")
+
+    .vspace
+    %h2 Production
+    %input.terminal(value="curl -l https://kjh353kjh531:vjnk33k5jnk@dxdt.io/dxdtd | bash")
+  .span4
+    %h3 Quick Help
+    %ul
+      %li
+        %a(href="#") Why do I have to be root?
+      %li
+        %a(href="#") I get "curl: command not found" and nothing happens.
+      
+.vspace2
+
+:css
+  input.terminal{
+    width:100%;
+    border: none;
+    font-family:'Courier New', Courier, monospace;
+  }

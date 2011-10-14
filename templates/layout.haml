@@ -1,6 +1,7 @@
 !!!
-!= '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">'
 %html
+  != '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">'
+  != '<meta http-equiv="content-language" content="en">'
   %head
     %link(rel="stylesheet" href="/app.css?#{q}" media="all")
     %script{src: "/transitive.js?#{q}"}
@@ -16,7 +17,7 @@
     %script{src: "/jquery.flot.js?#{q}"}
     %script{src: "/jquery.flot.selection.js?#{q}"}
     != "<!--[if lt IE 9]>"
-    != '<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>'
+    != '<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>'
     != "<![endif]-->"
 
     %title

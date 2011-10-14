@@ -14,7 +14,7 @@
 .clearfix
   %label Plan
   .input
-    %select(tabindex=4)
+    %select(name="plan" tabindex=4)
       != this.render("form/options", {options:[["Small", "s1"], ["Medium", "m1"], ["Large", "l1"], ["X-Large", "xl1"], ["Custom", "custom"]] })
 
 

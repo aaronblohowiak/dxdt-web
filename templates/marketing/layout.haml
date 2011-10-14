@@ -1,9 +1,10 @@
 !!!
-!= '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">'
 %html
+  != '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">'
+  != '<meta http-equiv="content-language" content="en">'
   %head
     %title
-      dxdt.io Change Over Time
+      dxdt.io Change Over Time | Server Monitoring | Monitor Every Process, Port and Machine
     %link(rel="stylesheet" href="/app.css?#{q}" media="all")
     %script{src: "/transitive.js?#{q}"}
     %script{src: "/templates.js?#{q}"}
@@ -19,7 +20,7 @@
     %script{src: "/jquery.flot.selection.js?#{q}"}
     %script{src: "/twipsy.js?#{q}"}
     != "<!--[if lt IE 9]>"
-    != '<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>'
+    != '<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>'
     != "<![endif]-->"
     :script
       var _gaq = _gaq || [];
@@ -65,23 +66,7 @@
           - }
           
     != content
-    .container.footer
-      .vspace
-      .row
-        .span4.darker
-          Got questions? <a href="mailto:questions@dxdt.io"> We're happy to help.</a> 
-        .span8.shhhh(style="text-align:center")
-          &copy; 2011 
-          %a(href="http://xitive.com")>
-            <b>X</b>itive Inc
-        .span4.shhhh
-          %a(href="/terms")>
-            Terms of Service
-          &nbsp;&nbsp;
-          %a(href="/privacy")>
-            Privacy Policy
-          
-      .vspace
+    != this.render("footer")
     :script
       !{etc}
       Transitive.boot();

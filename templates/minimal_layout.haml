@@ -1,0 +1,37 @@
+!!!
+%html
+  != '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">'
+  != '<meta http-equiv="content-language" content="en">'
+  %head
+    %link(rel="stylesheet" href="/app.css?#{q}" media="all")
+    %script{src: "/transitive.js?#{q}"}
+    %script{src: "/templates.js?#{q}"}
+    :script
+      Transitive = require("./transitive");
+      Transitive.Views.templates = require("./templates.js");
+      jQuery = $;
+      if(window.console){}else{
+        console = {};
+        console.log = function(){}
+      }
+      
+    %title
+      dxdt.io Change over time
+  %body.home.marketing
+    %div( class="topbar")
+      %div( class="fill")
+        %div( class="container")
+          %h3
+            %a.logo(href="/")
+              %img(src="/logotype-small.png" width="52px" height="22px")
+                  
+    .app
+    .vspace2 
+    .container.body.rounded
+      .vspace
+      != content
+    != this.render("footer")
+    .clear
+    :script
+      !{etc}
+      Transitive.boot();

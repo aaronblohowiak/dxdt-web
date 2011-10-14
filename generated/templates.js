@@ -1,4 +1,28 @@
-module.exports={  "account": function anonymous(locals) {
+module.exports={  "account/first": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="";
+this.crumbs = ["Account", "First Visit"]
+; _$output = _$output  +
+"<div class=\"row\"><div class=\"span12\"><h1>Start Monitoring</h1><p style=\"font-size:16px\">Paste the command in your server's terminal, after logging in as <span class=\"highlight\">root.</span> <br /></p><div class=\"vspace\"></div><h2>Development</h2><input value=\"curl -l https://kjh353kjh531:j3nkj15n3kj@dxdt.io/dxdtd | bash\" class=\"terminal\" /><div class=\"vspace\"></div><h2>Staging</h2><input value=\"curl -l https://kjh353kjh531:vjnk33k5jnk@dxdt.io/dxdtd | bash\" class=\"terminal\" /><div class=\"vspace\"></div><h2>Production</h2><input value=\"curl -l https://kjh353kjh531:vjnk33k5jnk@dxdt.io/dxdtd | bash\" class=\"terminal\" /></div><div class=\"span4\"><h3>Quick Help</h3><ul><li><a href=\"#\">Why do I have to be root?</a></li><li><a href=\"#\">I get \"curl: command not found\" and nothing happens.</a></li></ul></div></div><div class=\"vspace2\"></div><style type=\"text/css\">\ninput.terminal{\n  width:100%;\n  border: none;\n  font-family:'Courier New', Courier, monospace;\n}\n</style>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "account/login": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="<div class=\"login-box\"><h2>Please Log In</h2>Your session may have timed out.<div class=\"vspace\"></div><form action=\"/login\" method=\"POST\" class=\"form-stacked\">" + 
+this.render("form/input", {label:"Email", name: "email", ti: 1, errMsg: " Please enter a valid email"}) +
+this.render("form/input", {label:"Password", name: "password", ti: 2, type:"password", errMsg:"Must be between 4 and 80 letters"}) +
+"&nbsp;<input type=\"submit\" value=\"Log In\" tabindex=\"3\" class=\"btn primary large\" /></form></div>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "account": function anonymous(locals) {
 with(locals || {}) {
   try {
    var _$output="<div class=\"row\"><div class=\"span4 leftnav\"><div class=\"nav-category\"><h3><div class=\"ico\">♛</div><a href=\"/\">Environments</a></h3><div class=\"listing active\"> <a href=\"/\">Dev</a> </div><div class=\"listing\"> <a href=\"/\">Staging</a> </div><div class=\"listing\"> <a href=\"/\">Production</a> </div></div><div class=\"nav-category\"><h3><div class=\"ico\">♞</div><a href=\"/\">Servers</a></h3><div class=\"listing active\"> <a href=\"/\">Web Server 1</a> </div><div class=\"listing\"> <a href=\"/\">Web Server 2</a> </div><div class=\"listing\"> <a href=\"/\">Redis Server 1</a> </div></div><div class=\"nav-category\"><h3><div class=\"ico\">♟</div><a href=\"/\">Web Server 1</a></h3><div class=\"listing\"> <a href=\"/\">Overview</a> </div><div class=\"listing active\"> <a href=\"/\">Processes</a> </div><div class=\"listing\"> <a href=\"/\">CPU</a> </div><div class=\"listing\"> <a href=\"/\">Memory</a> </div><div class=\"listing\"> <a href=\"/\">Disk</a> </div><div class=\"listing\"> <a href=\"/\">Open Ports</a> </div></div></div><div class=\"span12\"><div class=\"row\"><div style=\"border-right:1px solid black; margin-right: -1px\" class=\"span6\"><h2>Most Memory</h2></div><div class=\"span6\"><h2>Most CPU</h2></div></div><div class=\"row\"><div class=\"span11 column\"><table class=\"zebra-striped\"><thead><tr><th>PID</th>" +
@@ -28,6 +52,15 @@ this.escape((status.processes[name] && status.processes[name][pid])) +
   }
 }
 }
+,  "admin/admin": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="hi";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
 ,  "cpu": function anonymous(locals) {
 with(locals || {}) {
   try {
@@ -43,7 +76,16 @@ with(locals || {}) {
    var _$output="";
 this.crumbs = ["Staging"]
 ; _$output = _$output  +
-"<div class=\"row\"><div class=\"span4 leftnav\"><div class=\"nav-category\"><h3><div class=\"ico\">♛</div><a href=\"/\">Staging</a></h3><div class=\"listing active\"> <a href=\"/\">Servers</a> </div><div class=\"listing\"> <a href=\"/\">Notes</a> </div></div></div><div class=\"span12\"><div class=\"page-header\"><h1>Staging <small class=\"strong\">1 Server</small> </h1></div><div class=\"row\"><div class=\"span12\"><h3>Find Servers, Processes, Ports &amp; Notes</h3><input type=\"text\" placeholder=\"server or environment stats\" class=\"search\" /></div></div><div class=\"vspace2\"></div><div class=\"row\"><div class=\"span12\"><h2>Servers</h2><div class=\"server-list\"> <span class=\"label success\">OK</span>  <a href=\"/server/123\">Web Server 1</a> abpmba.local<br /> <span class=\"label notice\">Recovered</span>  <a href=\"/server/123\">DB Server Master</a> ec2-wjn24jn5kj3n3<br /> <span class=\"label warning\">High Load</span>  <a href=\"/server/123\">DB Server Slave</a> ec2-wjn24jn5kj3n3abpmba.local</div></div></div><div class=\"vspace\"></div><div class=\"row\"><div class=\"span12\"><h2>Events</h2><div class=\"row\"><div class=\"span4\"><h3>Wed Sep 14</h3></div><div class=\"span8\"><div class=\"alert-message\">9:22 AM UTC Began listening to port 3000</div></div></div><hr /><div class=\"row\"><div class=\"span4\"><h3>Mon Sep 12</h3></div><div class=\"span8\"><div class=\"alert-message success\">8:05 PM UTC CPU stayed below 80% for 2 Minutes</div><div class=\"alert-message error\">7:58 PM UTC CPU Exceeded 90%  for 2 Minutes</div><div class=\"alert-message\">2:22 PM UTC Process Started</div></div></div></div></div></div></div>";
+"<div class=\"row\"><div class=\"span4 leftnav\"><div class=\"nav-category\"><h3><div class=\"ico\">♛</div><a href=\"/\">Staging</a></h3><div class=\"listing active\"> <a href=\"/\">Servers</a> </div><div class=\"listing\"> <a href=\"/\">Notes</a> </div></div></div><div class=\"span12\"><div class=\"page-header\"><h1>Staging <small class=\"strong\">3 Servers</small> </h1></div><div class=\"row\"><div class=\"span12\"><h3>Find Servers, Processes, Ports &amp; Notes</h3><input type=\"text\" placeholder=\"server or environment stats\" class=\"search\" /></div></div><div class=\"vspace2\"></div><div class=\"row\"><div class=\"span12\"><h2>Servers</h2><div class=\"server-list\"> <span class=\"label success\">OK</span>  <a href=\"/server/123\">Web Server 1</a> abpmba.local<br /> <span class=\"label notice\">Recovered</span>  <a href=\"/server/123\">DB Server Master</a> ec2-wjn24jn5kj3n3<br /> <span class=\"label warning\">High Load</span>  <a href=\"/server/123\">DB Server Slave</a> ec2-wjn24jn5kj3n3abpmba.local</div></div></div><div class=\"vspace\"></div><div class=\"row\"><div class=\"span12\"><h2>Events</h2><div class=\"row\"><div class=\"span4\"><h3>Wed Sep 14</h3></div><div class=\"span8\"><div class=\"alert-message\">9:22 AM UTC Began listening to port 3000</div></div></div><hr /><div class=\"row\"><div class=\"span4\"><h3>Mon Sep 12</h3></div><div class=\"span8\"><div class=\"alert-message success\">8:05 PM UTC CPU stayed below 80% for 2 Minutes</div><div class=\"alert-message error\">7:58 PM UTC CPU Exceeded 90%  for 2 Minutes</div><div class=\"alert-message\">2:22 PM UTC Process Started</div></div></div></div></div></div></div>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "footer": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="<div class=\"container footer\"><div class=\"vspace\"></div><div class=\"row\"><div class=\"span4 darker\">Got questions? <a href=\"mailto:questions@dxdt.io\"> We're happy to help.</a> </div><div style=\"text-align:center\" class=\"span8 shhhh\">&copy; 2011  <a href=\"http://xitive.com\"><b>X</b>itive Inc</a> </div><div class=\"span4 shhhh\"> <a href=\"/terms\">Terms of Service</a> &nbsp;&nbsp; <a href=\"/privacy\">Privacy Policy</a> </div></div></div><div class=\"vspace\"></div>";
  return _$output;  } catch (e) {
     return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
   }
@@ -103,6 +145,7 @@ if(locals.value===undefined){locals.value='';}
 if(locals.errors===undefined){locals.errors=null;}
 if(!locals.ti){locals.ti=null;}
 if(!locals.type){locals.type="text";}
+if(!locals.id){locals.id=""; }
 
 locals.errors ? locals.klass="error" : locals.klass="";; _$output = _$output ;
  return _$output;  } catch (e) {
@@ -119,7 +162,7 @@ with(locals || {}) {
 "<label>" + 
 this.escape(label) + 
 "</label><div class=\"input\">" +
-" <input name=\"" + this.escape(name) + "\" tabindex=\"" + this.escape(ti) + "\" value=\"" + this.escape(value) + "\" type=\"" + this.escape(type) + "\" id=\"email\" /> " +
+" <input name=\"" + this.escape(name) + "\" tabindex=\"" + this.escape(ti) + "\" value=\"" + this.escape(value) + "\" type=\"" + this.escape(type) + "\" id=\"" + this.escape(locals.id) + "\" /> " +
 (function () { if (locals.additionalText) { return (
 locals.additionalText
 );} else { return ""; } }).call(this) +
@@ -159,9 +202,10 @@ this.escape(option[0]) +
 ,  "layout": function anonymous(locals) {
 with(locals || {}) {
   try {
-   var _$output="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
+   var _$output="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>" + 
 '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">' +
-"<html><head><link rel=\"stylesheet\" href=\"/app.css?" +
+'<meta http-equiv="content-language" content="en">' +
+"<head><link rel=\"stylesheet\" href=\"/app.css?" +
 this.escape(q) +
 "\" media=\"all\" /><script src=\"/transitive.js?" +
 this.escape(q) +
@@ -172,7 +216,7 @@ this.escape(q) +
 "\"></script><script src=\"/jquery.flot.selection.js?" +
 this.escape(q) +
 "\"></script><!--[if lt IE 9]>" +
-'<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>' +
+'<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>' +
 "<![endif]--><title>dxdt.io Change over time</title></head><body><div class=\"topbar\"><div class=\"fill\"><div class=\"container\"><h3><a href=\"/\" class=\"logo\"><img src=\"/logotype-small.png\" width=\"52px\" height=\"22px\" /></a></h3><ul><li><a href=\"/\">Home</a></li>" +
 (function () { if (this.crumbs) { return (
 (function () { var __result__ = [], __key__, idx; for (__key__ in this.crumbs) { if (this.crumbs.hasOwnProperty(__key__)) { idx = this.crumbs[__key__]; __result__.push(
@@ -194,7 +238,7 @@ etc +
 ,  "marketing/easy": function anonymous(locals) {
 with(locals || {}) {
   try {
-   var _$output="<style type=\"text/css\">\n.main ul.unstyled > li{\n  color: #333;\n  font-size:18px;\n  line-height:24px;\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><div class=\"row\"><div class=\"span8\"><h1>The Easiest Server Monitoring</h1><h2> <img src=\"/terminal.png\" style=\"vertical-align:top\" width=\"32px\" height=\"32px\" /> <b>One-Minute install:</b></h2><ul class=\"unstyled\"><li>1. Log In</li><li>2. Click \"Staging\" or \"Production\" to pick an environment for the server.</li><li>3. Copy the \"Server Setup Command\"</li><li>4. SSH into your server and paste the command.</li><li>5. You're done!</li></ul><p>Within a few seconds, you should see your server added to the environment and events added to the <a href=\"/event-stream\">event stream</a>.</p><div class=\"vspace\"></div><div style=\"text-align:center\" class=\"span8\"><a href=\"/plans\" class=\"btn primary\"><big><b>Start Your 30-day free trial »</b></big></a><br />  No Credit Card required.</div></div><div class=\"span8\"><h1>&nbsp;</h1><h2>Every Process and Port</h2><p>Just by installing the script, we start monitoring every <a href=\"/process-monitoring\">process</a> and <a href=\"/port-monitoring\">port.</a> You don't have to worry about installing any plugins or changing things as you add more services to a machine; all new services will be picked up automatically.</p><h2 style=\"margin-top:18px\">Automatic API Keys &amp; Security Tokens!</h2><p>The command you paste into your server downloads a script that is customized for your account and environment.</p><p>It includes an API Key and a Security Token <i>inside</i> the script so there is nothing to configure.</p></div></div><div class=\"vspace2\"></div></div></div></div>";
+   var _$output="<style type=\"text/css\">\n.main ul.unstyled > li{\n  color: #333;\n  font-size:18px;\n  line-height:24px;\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><div class=\"row\"><div class=\"span8\"><h1>The Easiest Server Monitoring</h1><h2> <img src=\"/terminal.png\" style=\"vertical-align:top\" width=\"32px\" height=\"32px\" /> <b>One-Minute install:</b></h2><ul class=\"unstyled\"><li>1. Log In</li><li>2. Click \"Staging\" or \"Production\" to pick an environment for the server.</li><li>3. Copy the \"Server Setup Command\"</li><li>4. SSH into your server and paste the command.</li><li>5. You're done!</li></ul><p>Within a few seconds, you should see your server added to the environment and events added to the <a href=\"/event-streams\">event stream</a>.</p><div class=\"vspace\"></div><div style=\"text-align:center\" class=\"span8\"><a href=\"/plans\" class=\"btn primary\"><big><b>Start Your 30-day free trial »</b></big></a><br />  No Credit Card required.</div></div><div class=\"span8\"><h1>&nbsp;</h1><h2>Every Process and Port</h2><p>Just by installing the script, we start monitoring every <a href=\"/process-monitoring\">process</a> and <a href=\"/port-monitoring\">port.</a> You don't have to worry about installing any plugins or changing things as you add more services to a machine; all new services will be picked up automatically.</p><h2 style=\"margin-top:18px\">Automatic API Keys &amp; Security Tokens!</h2><p>The command you paste into your server downloads a script that is customized for your account and environment.</p><p>It includes an API Key and a Security Token <i>inside</i> the script so there is nothing to configure.</p></div></div><div class=\"vspace2\"></div></div></div></div>";
  return _$output;  } catch (e) {
     return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
   }
@@ -233,9 +277,10 @@ this.crumbs = [["", "Features"], ["", "Pricing"], ["", "Contact"], ["", "Documen
 ,  "marketing/layout": function anonymous(locals) {
 with(locals || {}) {
   try {
-   var _$output="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
+   var _$output="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>" + 
 '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">' +
-"<html><head><title>dxdt.io Change Over Time</title><link rel=\"stylesheet\" href=\"/app.css?" +
+'<meta http-equiv="content-language" content="en">' +
+"<head><title>dxdt.io Change Over Time | Server Monitoring | Monitor Every Process, Port and Machine</title><link rel=\"stylesheet\" href=\"/app.css?" +
 this.escape(q) +
 "\" media=\"all\" /><script src=\"/transitive.js?" +
 this.escape(q) +
@@ -248,7 +293,7 @@ this.escape(q) +
 "\"></script><script src=\"/twipsy.js?" +
 this.escape(q) +
 "\"></script><!--[if lt IE 9]>" +
-'<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>' +
+'<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>' +
 "<![endif]-->\n<script type=\"text/javascript\">\n//<![CDATA[\nvar _gaq = _gaq || [];\n_gaq.push(['_setAccount', 'UA-26084577-1']);\n_gaq.push(['_setDomainName', 'dxdt.io']);\n_gaq.push(['_trackPageview']);\n\n(function() {\n  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;\n  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';\n  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);\n})();\n\n\n//]]>\n</script>\n</head><body class=\"marketing\"><div class=\"topbar\"><div class=\"fill\"><div class=\"container\"><h3><a href=\"/\" style=\"letter-spacing:3px;\"><img src=\"/logotype-small.png\" width=\"52px\" height=\"22px\" /></a></h3><ul><li><a style=\"letter-spacing:2px\">(877) 250-4337</a></li></ul>" +
 "";if(!this.app.hideTopNav){; _$output = _$output  +
 "<ul><li><a href=\"/features\">Features</a></li><li><b><a href=\"/plans\">Plans & Pricing</a></b></li><li><a href=\"mailto:support@dxdt.io\">Support</a></li></ul><ul class=\"secondary-nav\"><li><form action=\"/login\" method=\"POST\" id=\"login-form\"><input placeholder=\"Email Address\" name=\"email\" class=\"username\" /><input placeholder=\"Password\" type=\"password\" name=\"password\" class=\"password\" /><a href=\"#\" onclick=\"$('#login-form').submit()\" class=\"login\">Log In</a><!--we need this for enter to 'just work'--><div style=\"position:absolute; left:-99999px\"><input type=\"submit\" /></div></form></li></ul>" +
@@ -256,7 +301,8 @@ this.escape(q) +
 ; _$output = _$output  + 
 "</div></div></div>" +
 content +
-"<div class=\"container footer\"><div class=\"vspace\"></div><div class=\"row\"><div class=\"span4 darker\">Got questions? <a href=\"mailto:questions@dxdt.io\"> We're happy to help.</a> </div><div style=\"text-align:center\" class=\"span8 shhhh\">&copy; 2011  <a href=\"http://xitive.com\"><b>X</b>itive Inc</a> </div><div class=\"span4 shhhh\"> <a href=\"/terms\">Terms of Service</a> &nbsp;&nbsp; <a href=\"/privacy\">Privacy Policy</a> </div></div><div class=\"vspace\"></div></div>\n<script type=\"text/javascript\">\n//<![CDATA[\n" +
+this.render("footer") +
+"\n<script type=\"text/javascript\">\n//<![CDATA[\n" +
 etc +
 "\nTransitive.boot();\n$(function () {\n  $(\"a[rel=twipsy]\").twipsy({\n    live: false,\n    animate: false\n  })\n});\n//]]>\n</script>\n</body></html>";
  return _$output;  } catch (e) {
@@ -324,7 +370,7 @@ this.render("form/checkbox", {label:"Request Notification", name: "invite", ti: 
 ,  "marketing/port-monitoring": function anonymous(locals) {
 with(locals || {}) {
   try {
-   var _$output="<style type=\"text/css\">\n.main ul > li{\n  color: #333;\n  font-size:18px;\n  line-height:36px;\n\n}\n\n.main p{\n  color:#444\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><h1>Port Monitoring <small style=\"color:#666\">100% Automatic: No Configuration.</small> </h1><div class=\"row\"><div class=\"span8\"><h2>Every open TCP port on every machine.</h2><p>Port monitoring tells you:</p><ul><li>What process is listening on which port</li><li>When was the Port was opened</li><li>Which host the port is bound to</li></ul></div><div class=\"span8\"><h2>Other Features:</h2><ul><li><b> <a href=\"/process-monitoring\">Process Monitoring</a> </b>tracks the RAM and CPU usage of every process on the machine.</li><li> <a href=\"/system-monitoring\">System Monitoring</a> watches the Load, disk space and</li><li> <a href=\"/event-stream\">Event Streaming</a> is like Twitter for servers.</li></ul></div></div><div style=\"text-align:center\" class=\"span8\"><div class=\"vspace2\"></div><a href=\"/plans\" class=\"btn primary\"><big><b>Start Your 30-day FREE trial »</b></big></a><br />No Credit Card required.<div class=\"vspace2\"></div></div></div></div></div>";
+   var _$output="<style type=\"text/css\">\n.main ul > li{\n  color: #333;\n  font-size:18px;\n  line-height:36px;\n\n}\n\n.main p{\n  color:#444\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><h1>Port Monitoring <small style=\"color:#666\">100% Automatic: No Configuration.</small> </h1><div class=\"row\"><div class=\"span8\"><h2>Every open TCP port on every machine.</h2><p>Port monitoring tells you:</p><ul><li>What process is listening on which port</li><li>When was the Port was opened</li><li>Which host the port is bound to</li></ul></div><div class=\"span8\"><h2>Other Features:</h2><ul><li><b> <a href=\"/process-monitoring\">Process Monitoring</a> </b>tracks the RAM and CPU usage of every process on the machine.</li><li> <a href=\"/system-monitoring\">System Monitoring</a> watches the Load, disk space and</li><li> <a href=\"/event-streams\">Event Streaming</a> is like Twitter for servers.</li></ul></div></div><div style=\"text-align:center\" class=\"span8\"><div class=\"vspace2\"></div><a href=\"/plans\" class=\"btn primary\"><big><b>Start Your 30-day FREE trial »</b></big></a><br />No Credit Card required.<div class=\"vspace2\"></div></div></div></div></div>";
  return _$output;  } catch (e) {
     return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
   }
@@ -333,7 +379,7 @@ with(locals || {}) {
 ,  "marketing/process-monitoring": function anonymous(locals) {
 with(locals || {}) {
   try {
-   var _$output="<style type=\"text/css\">\n.main ul > li{\n  color: #333;\n  font-size:18px;\n  line-height:24px;\n}\n\n.main p{\n  color:#444\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><h1>Process Monitoring <small style=\"color:#666\">100% Automatic: No Configuration.</small> </h1><div class=\"row\"><div class=\"span8\"><p><span class=\"highlight\">dxdt is like a searchable, graphed version of `top` that works across all of your machines</span></p><h3>For every process on the machine, you'll see:</h3><ul><li>RAM & CPU Usage</li><li>The  <a href=\"/port-monitoring\">TCP Ports</a> this process is listening on</li><li> <a href=\"/event-stream\">Critical events</a> and custom notes.</li><li>The command-line options used to start the program</li><li>When the process started and ended</li></ul><p>You can monitor your systems for performance problems, plan capacity, and <span class=\"highlight\">perform a root cause analysis faster and easier than anything else.</span> <a href=\"/plans\">Try dxdt</a> and see for yourself.</p><div class=\"vspace2\"></div><div class=\"row\"><div style=\"text-align:center\" class=\"span8\"><a href=\"/plans\" class=\"btn primary\"><big><b>Start Your 30-day FREE trial »</b></big></a><br />  No Credit Card required.</div></div><div class=\"vspace2\"></div><h2 id=\"terminated\">Search Terminated Processes</h2><p>With dxdt, you can use regular expressions to search through all your currently running processes and all processes that have terminated within the last 4 weeks.</p><p>Click on the name of a process and you'll see its detailed performance history. You can drill down, compare, and annotate graphs for the <b>fastest</b> root cause analysis.</p></div><div class=\"span8\"><br /><br /><img src=\"/process-monitoring.png\" width=\"459px\" height=\"507px\" class=\"pop\" /><div class=\"vspace2\"></div><center>This is just a placeholder image for now while we're in Beta.<div class=\"vspace\"></div><p><a href=\"/plans\">Start your FREE 30-day trial  »</a></p></center></div></div><div class=\"vspace2\"></div></div></div></div>";
+   var _$output="<style type=\"text/css\">\n.main ul > li{\n  color: #333;\n  font-size:18px;\n  line-height:24px;\n}\n\n.main p{\n  color:#444\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><h1>Process Monitoring <small style=\"color:#666\">100% Automatic: No Configuration.</small> </h1><div class=\"row\"><div class=\"span8\"><p><span class=\"highlight\">dxdt is like a searchable, graphed version of `top` that works across all of your machines</span></p><h3>For every process on the machine, you'll see:</h3><ul><li>RAM & CPU Usage</li><li>The  <a href=\"/port-monitoring\">TCP Ports</a> this process is listening on</li><li> <a href=\"/event-streams\">Critical events</a> and custom notes.</li><li>The command-line options used to start the program</li><li>When the process started and ended</li></ul><p>You can monitor your systems for performance problems, plan capacity, and <span class=\"highlight\">perform a root cause analysis faster and easier than anything else.</span> <a href=\"/plans\">Try dxdt</a> and see for yourself.</p><div class=\"vspace2\"></div><div class=\"row\"><div style=\"text-align:center\" class=\"span8\"><a href=\"/plans\" class=\"btn primary\"><big><b>Start Your 30-day FREE trial »</b></big></a><br />  No Credit Card required.</div></div><div class=\"vspace2\"></div><h2 id=\"terminated\">Search Terminated Processes</h2><p>With dxdt, you can use regular expressions to search through all your currently running processes and all processes that have terminated within the last 4 weeks.</p><p>Click on the name of a process and you'll see its detailed performance history. You can drill down, compare, and annotate graphs for the <b>fastest</b> root cause analysis.</p></div><div class=\"span8\"><br /><br /><img src=\"/process-monitoring.png\" width=\"459px\" height=\"507px\" class=\"pop\" /><div class=\"vspace2\"></div><center>This is just a placeholder image for now while we're in Beta.<div class=\"vspace\"></div><p><a href=\"/plans\">Start your FREE 30-day trial  »</a></p></center></div></div><div class=\"vspace2\"></div></div></div></div>";
  return _$output;  } catch (e) {
     return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
   }
@@ -364,7 +410,7 @@ this.app.errors = errors
 this.render("form/input", {label:"Email address", name: "email", ti: 1, errMsg: " Please enter a valid email"}) +
 this.render("form/input", {label:"Password", name: "password", ti: 2, type:"password", errMsg:"Must be between 4 and 80 letters"}) +
 this.render("form/input", {label:"Cell Phone", name: "cell", ti: 3, tip:'Used for SMS Alerts, Security and Account Information'}) +
-"<div class=\"clearfix\"><label>Plan</label><div class=\"input\"><select tabindex=\"4\">" + 
+"<div class=\"clearfix\"><label>Plan</label><div class=\"input\"><select name=\"plan\" tabindex=\"4\">" + 
 this.render("form/options", {options:[["Small", "s1"], ["Medium", "m1"], ["Large", "l1"], ["X-Large", "xl1"], ["Custom", "custom"]] }) + 
 "</select></div></div>" +
 this.render("form/checkbox", {label:"Terms of Service", name: "tos", ti: 5, additionalText: 'I have read and agree to the <a href="/terms" target="_blank">Terms of Service</a>', wrapperStyle:"margin-bottom:0px", errMsg:"You must agree to the TOS to continue."});
@@ -376,7 +422,7 @@ this.render("form/checkbox", {label:"Terms of Service", name: "tos", ti: 5, addi
 ,  "marketing/system-monitoring": function anonymous(locals) {
 with(locals || {}) {
   try {
-   var _$output="<style type=\"text/css\">\n.main ul > li{\n  color: #333;\n  font-size:18px;\n  line-height:36px;\n\n}\n\n.main p{\n  color:#444\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><h1>Server Monitoring <small style=\"color:#666\">100% Automatic: No Configuration. <a href=\"/easiest-server-monitoring\">One-minute install.</a> </small> </h1><div class=\"row\"><div class=\"span8\"><h2>Load Avg &amp; Disk Usage</h2><p>Ensure your servers don't get overloaded by monitoring load average. Chart free space on disk to keep plenty of headroom to avoid disk full errors. You can also see how long each disk usage check takes to monitor disk latency.</p><h2>Server Processes</h2><p>See which processes are using the CPU and RAM, and quickly drill down into the <a href=\"/process-monitoring\">detailed performance history</a> of each process.</p></div><div class=\"span8\"><h2>Networking</h2><p>See <a href=\"/port-monitoring\">every open port</a> for all your machines, their IP addresses and current configuration.</p><h2>Event Streams:</h2><p> <a href=\"/event-stream\">Event Streaming</a> shows you what is happening at a high level, like Twitter for servers.</p><div class=\"vspace2\"></div><div class=\"row\"><div style=\"text-align:center\" class=\"span8\"><a href=\"/plans\" class=\"btn primary\"><big><b>Start Your 30-day FREE trial »</b></big></a><br />  No Credit Card required.</div></div><div class=\"vspace2\"></div></div></div></div></div></div>";
+   var _$output="<style type=\"text/css\">\n.main ul > li{\n  color: #333;\n  font-size:18px;\n  line-height:36px;\n\n}\n\n.main p{\n  color:#444\n}\n\n</style><div class=\"app\"></div><div class=\"home\"><div class=\"vspace\"></div><div class=\"body container rounded\"><div class=\"vspace\"></div><div class=\"container main\"><h1>Server Monitoring <small style=\"color:#666\">100% Automatic: No Configuration. <a href=\"/easiest-server-monitoring\">One-minute install.</a> </small> </h1><div class=\"row\"><div class=\"span8\"><h2>Load Avg &amp; Disk Usage</h2><p>Ensure your servers don't get overloaded by monitoring load average. Chart free space on disk to keep plenty of headroom to avoid disk full errors. You can also see how long each disk usage check takes to monitor disk latency.</p><h2>Server Processes</h2><p>See which processes are using the CPU and RAM, and quickly drill down into the <a href=\"/process-monitoring\">detailed performance history</a> of each process.</p></div><div class=\"span8\"><h2>Networking</h2><p>See <a href=\"/port-monitoring\">every open port</a> for all your machines, their IP addresses and current configuration.</p><h2>Event Streams:</h2><p> <a href=\"/event-streams\">Event Streaming</a> shows you what is happening at a high level, like Twitter for servers.</p><div class=\"vspace2\"></div><div class=\"row\"><div style=\"text-align:center\" class=\"span8\"><a href=\"/plans\" class=\"btn primary\"><big><b>Start Your 30-day FREE trial »</b></big></a><br />  No Credit Card required.</div></div><div class=\"vspace2\"></div></div></div></div></div></div>";
  return _$output;  } catch (e) {
     return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
   }
@@ -395,6 +441,30 @@ with(locals || {}) {
 with(locals || {}) {
   try {
    var _$output="<h3>% Memory</h3><div style=\"width:400px;height:200px\" class=\"flotGraph\"></div><div class=\"lastupdated\"></div>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
+,  "minimal_layout": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>" + 
+'<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">' +
+'<meta http-equiv="content-language" content="en">' +
+"<head><link rel=\"stylesheet\" href=\"/app.css?" +
+this.escape(q) +
+"\" media=\"all\" /><script src=\"/transitive.js?" +
+this.escape(q) +
+"\"></script><script src=\"/templates.js?" +
+this.escape(q) +
+"\"></script>\n<script type=\"text/javascript\">\n//<![CDATA[\nTransitive = require(\"./transitive\");\nTransitive.Views.templates = require(\"./templates.js\");\njQuery = $;\nif(window.console){}else{\n  console = {};\n  console.log = function(){}\n}\n\n//]]>\n</script>\n<title>dxdt.io Change over time</title></head><body class=\"home marketing\"><div class=\"topbar\"><div class=\"fill\"><div class=\"container\"><h3><a href=\"/\" class=\"logo\"><img src=\"/logotype-small.png\" width=\"52px\" height=\"22px\" /></a></h3></div></div></div><div class=\"app\"></div><div class=\"vspace2\"></div><div class=\"container body rounded\"><div class=\"vspace\"></div>" +
+content + 
+"</div>" +
+this.render("footer") +
+"<div class=\"clear\"></div>\n<script type=\"text/javascript\">\n//<![CDATA[\n" +
+etc +
+"\nTransitive.boot();\n//]]>\n</script>\n</body></html>";
  return _$output;  } catch (e) {
     return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
   }

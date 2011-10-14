@@ -193,8 +193,16 @@ html {
   } 
 }
 
-.home{
-  
+.shadowed {
+  .box-shadow(2px 2px 20px rgba(0,0,0,0.25))
+}
+
+.rounded{
+  .border-radius(10px);
+}
+
+
+.home{  
   img.pop {
     .box-shadow(1px 1px 10px rgba(0,0,0,0.10))
   }
@@ -204,12 +212,10 @@ html {
     border: 1px solid #e5e5e5;
     padding: 0 20px;
     overflow:hidden;
-    .box-shadow(2px 2px 20px rgba(0,0,0,0.25))
+    .shadowed;
+    .rounded;
   }
-  
-  > .body.rounded{
-    .border-radius(10px);
-  }
+
   
   > .body.rounded-bottom{
     .border-radius( 0 0 10px 10px);
@@ -282,6 +288,8 @@ html {
   padding:@gridGutterWidth;
   color:@grayDark;
   border-bottom:1px solid #e5e5e5;
+  border-top:1px solid #e5e5e5;
+  
 }
 
 .vspace {

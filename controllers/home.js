@@ -2,10 +2,12 @@ var formulate = require("formulate");
 
 var Valid = require("../lib/valid.js");
 var passwords = require("../lib/passwords.js");
-
+var sha1 = require("easyhash")('sha1');
 var exec = require("child_process").exec;
 
 module.exports = function(routes, Transitive){
+  var sessions = require("../lib/session")(Transitive.App.sessionsClient);
+  var accounts = Transitive.App.accountsClient;
   
   function marketing(req, res, page, locals){
     if(!locals){ locals={}; }
@@ -30,8 +32,6 @@ module.exports = function(routes, Transitive){
     });
   });
 
-
-  
   routes.get("/easiest-server-monitoring", function(req, res){
     marketing(req, res, "easy");
   });
@@ -55,30 +55,82 @@ module.exports = function(routes, Transitive){
 
       var errors = userValid.test(fields);
       if(errors){
+        console.dir(errors);
         return marketing(req, res, "signup", {fields: fields, errors: errors});
-      }else{
-        passwords.toHash(fields.password, function(err, hsh){
-          res.writeHead(200, { 
-            'Content-Type': 'text/plain'
-          });
-          res.end(hsh);
-        });
       }
       
-      //check if email already exists
-      //verify that plan is valid planId
-      //create account!
+      var email = fields.email.toLowerCase();
+      accounts.get("/users/byemail/"+sha1(email), function(err, id){
+        if(err){ return fail("couldn't check email for duplicate entry in accounts."); }
+        
+        if(id){
+          res.end("An account already exists for that email address.  Email forgot@dxdt.io if you forgot your password.");
+          return;
+        }
+
+        fields.accountId = "/accounts/"+newId(22);
+        createUser(fields, function(err, user){
+          if(err) return fail("could not create user");
+          createAccount(fields, user, function(err, account){
+            if(err) return fail("could not create account");
+
+            sessions.createSession(req, res, {
+                user: user.id
+              }, function(err){
+              res.writeHead(302, {
+                'Content-Type':'text/plain',
+                'Location':'/account/first'
+              });
+              res.end("Thanks, redirecting you to your account.");
+            });
+          });
+        }); 
+      });
       
     }, 10);
   });
+  
+  function createAccount(fields, user, cb){
+    var account = {
+      id: fields.accountId,
+      primaryUserId: user.id,
+      plan: fields.plan
+    };
+
+    accounts.hmset(account.id, account, function(err){
+      cb(err, account);
+    });
+  }
+  
+  function createUser(fields, cb){
+    var id = "/users/"+newId(22);
+    passwords.toHash(fields.password, function(err, hsh){
+      var user = {
+        id: id,
+        phone: fields.cell,
+        tos: (new Date()).getTime(),
+        email: fields.email,
+        accountId: fields.accountId,
+        password: hsh
+      };
+    
+      accounts.set("/users/byemail/"+sha1(fields.email.toLowerCase()), id, function(err){
+        if(err) return cb(err);
+        accounts.hmset(id, user, function(err){
+          cb(err, user);
+        });
+      });
+    });
+  }
 };
 
 
-emailReg = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+var emailReg = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
 
 userValid = Valid.json({
   email: emailReg,
   password: Valid.notBlank().len(4, 80),
   tos: "on",
-  cell: /.*/
+  cell: /.*/,
+  plan: /.*/
 });

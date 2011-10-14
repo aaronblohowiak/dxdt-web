@@ -3,7 +3,7 @@
 .clearfix(class=klass)
   %label=label
   .input
-    %input#email{name: name, tabindex:ti, value:value, type:type}>
+    %input{name: name, tabindex:ti, value:value, type:type, id: locals.id}>
     :if locals.additionalText
       != locals.additionalText
 
