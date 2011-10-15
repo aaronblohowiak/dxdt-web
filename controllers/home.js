@@ -50,6 +50,10 @@ module.exports = function(routes, Transitive){
   });
   
   routes.post("/signup", function(req, res){
+    function fail(err){
+      failure(req, res, err);
+    }
+    
     formulate(req, res, function(err, fields, files){
       if(!fields.tos){fields.tos = false;} // stupid checkboxes.
 
@@ -73,22 +77,36 @@ module.exports = function(routes, Transitive){
           if(err) return fail("could not create user");
           createAccount(fields, user, function(err, account){
             if(err) return fail("could not create account");
-
-            sessions.createSession(req, res, {
-                user: user.id
-              }, function(err){
-              res.writeHead(302, {
-                'Content-Type':'text/plain',
-                'Location':'/account/first'
+            setupDatabase(account, function(err, db){
+              if(err) return fail(err);
+              sessions.createSession(req, res, {
+                  user: user.id
+                }, function(err){
+                res.writeHead(302, {
+                  'Content-Type':'text/plain',
+                  'Location':'/account/first'
+                });
+                res.end("Thanks, redirecting you to your account.");
               });
-              res.end("Thanks, redirecting you to your account.");
             });
           });
         }); 
       });
-      
     }, 10);
   });
+  
+  function failure(req, res, err){
+    res.end(err);
+    console.log(err);
+  }
+
+  function setupDatabase(account, cb){
+    Transitive.App.provisioner.provision(function(err, settings){
+      if(err) return cb(err);
+      console.log(settings);
+      accounts.hset(account.id, "dbId", settings.id, cb);
+    });
+  }
   
   function createAccount(fields, user, cb){
     var account = {
