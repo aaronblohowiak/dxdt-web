@@ -1,0 +1,37 @@
+-
+  this.crumbs = [["/account", "Account"], ["/account/start-monitoring", "Start Monitoring"]]
+
+.row
+  .span16
+    %h1 Start Monitoring
+    %p(style="font-size:16px") Paste the command in your server's terminal, after logging in as 
+      %span.highlight> root.
+      %br
+   
+    - 
+      accountId = account.dbId.slice(11)
+      function tokenId(token){
+        return token.slice(8);
+      }
+    
+    :for environment in environments
+      .vspace
+      %h2= environment.name
+      %input.terminal(value="curl -l https://#{accountId}:#{tokenId(environment.token)}@dxdt.io/install.sh | bash")
+    .vspace2 
+  .span4
+    %h3 Quick Help
+    %b Why do I have to be root?
+    %p You have to be root so we can list all of the processes and open ports on the machine.
+    
+    %b I get "curl: command not found" and nothing happens.
+    %p You must have the following commands available as root:  bash curl tar gzip lsof ps df netstat
+      
+.vspace2
+
+:css
+  input.terminal{
+    width:100%;
+    border: none;
+    font-family:'Courier New', Courier, monospace;
+  }

@@ -5,6 +5,8 @@ var passwords = require("../lib/passwords.js");
 var sha1 = require("easyhash")('sha1');
 var exec = require("child_process").exec;
 
+var redis = require("redis").createClient;
+
 module.exports = function(routes, Transitive){
   var sessions = require("../lib/session")(Transitive.App.sessionsClient);
   var accounts = Transitive.App.accountsClient;
@@ -53,7 +55,7 @@ module.exports = function(routes, Transitive){
     function fail(err){
       failure(req, res, err);
     }
-    
+
     formulate(req, res, function(err, fields, files){
       if(!fields.tos){fields.tos = false;} // stupid checkboxes.
 
@@ -62,11 +64,10 @@ module.exports = function(routes, Transitive){
         console.dir(errors);
         return marketing(req, res, "signup", {fields: fields, errors: errors});
       }
-      
+
       var email = fields.email.toLowerCase();
       accounts.get("/users/byemail/"+sha1(email), function(err, id){
         if(err){ return fail("couldn't check email for duplicate entry in accounts."); }
-        
         if(id){
           res.end("An account already exists for that email address.  Email forgot@dxdt.io if you forgot your password.");
           return;
@@ -84,17 +85,17 @@ module.exports = function(routes, Transitive){
                 }, function(err){
                 res.writeHead(302, {
                   'Content-Type':'text/plain',
-                  'Location':'/account/first'
+                  'Location':'/account/start-monitoring'
                 });
                 res.end("Thanks, redirecting you to your account.");
               });
             });
           });
-        }); 
+        });
       });
     }, 10);
   });
-  
+
   function failure(req, res, err){
     res.end(err);
     console.log(err);
@@ -104,10 +105,77 @@ module.exports = function(routes, Transitive){
     Transitive.App.provisioner.provision(function(err, settings){
       if(err) return cb(err);
       console.log(settings);
-      accounts.hset(account.id, "dbId", settings.id, cb);
+      accounts.hset(account.id, "dbId", "/databases/"+settings.id, function(){
+        connectToTsDb(settings, function(err, client){
+          var dev = newId(22);
+          //create environment
+          createEnvironment(client, "Production", function(err, env){
+            createEnvironment(client, "Staging", function(err, env){
+              createEnvironment(client, "Development", function(err, env){
+                cb(null, settings)
+              });
+            });
+          });
+        });
+      });
     });
   }
-  
+
+  function connectToTsDb(settings, cb){
+    var client = redis(settings.port, settings.host);
+    var state = "unconnected";
+    
+    client.on("error", function(err){
+      client.closing = true;
+      client.end();
+      if(state == "unconnected"){
+        cb(err);
+      }
+    });
+
+    client.auth(settings.password, function(err, status){
+      if(err){        
+        state = "auth-error";
+        client.closing = true;
+        return cb(err);
+      }
+      
+      return cb(null, client);
+    });
+  }
+
+  function stamp(){
+    return Math.floor((new Date).getTime()/1000);
+  }
+  //this surely belongs elsewhere
+  function createEnvironment(client, name, cb){
+    var id = "/environments/"+newId(22);
+    var tokenId = newId(32, 62);
+    
+    var environment = {
+      id: id,
+      name: name,
+      createdAt: stamp(),
+      token: "/tokens/"+tokenId
+    };
+
+    var token = {
+      on: id,
+      level: 3, // none, read, write, admin!
+      createdAt: stamp()
+    }
+    
+    client.sadd("/environments", id, function(err, status){
+      client.hmset(id, environment, function(err, status){
+        client.sadd(id+"/tokens", "/tokens/"+tokenId, function(err, status){
+          client.hmset("/tokens/"+tokenId, token, function(err, status){        
+            cb(err, environment);
+          });
+        });
+      })
+    });
+  }
+
   function createAccount(fields, user, cb){
     var account = {
       id: fields.accountId,

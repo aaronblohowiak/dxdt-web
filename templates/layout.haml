@@ -27,28 +27,24 @@
       %div( class="fill")
         %div( class="container")
           %h3
-            %a.logo(href="/")
+            %a.logo(href="/account/dashboard")
               %img(src="/logotype-small.png" width="52px" height="22px")
           %ul
             %li
-              %a(href="/") Home
+              %a(href="/account/dashboard") Home
             :if this.crumbs
-              :each idx in this.crumbs
+              :each crumb in this.crumbs
                 %li
                   %a.skinny
-                    >
+                    \/
                 %li
-                  %a(href="#masthead")= idx
+                  %a{href: crumb[0]}= crumb[1]
           %ul.secondary-nav
             %li
               %form
                 %input.search
             %li.dropdown(style="margin-left:10px")
-              %a.dropdown-toggle(href="#toggle") Account
-              %ul.dropdown-menu
-                %li
-                  %a(href="#") secondary-link
-                  
+              %a(href="/logout") Log Out
     .app
     .container.main.workspace
       != content

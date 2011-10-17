@@ -1,16 +1,4 @@
-module.exports={  "account/first": function anonymous(locals) {
-with(locals || {}) {
-  try {
-   var _$output="";
-this.crumbs = ["Account", "First Visit"]
-; _$output = _$output  +
-"<div class=\"row\"><div class=\"span12\"><h1>Start Monitoring</h1><p style=\"font-size:16px\">Paste the command in your server's terminal, after logging in as <span class=\"highlight\">root.</span> <br /></p><div class=\"vspace\"></div><h2>Development</h2><input value=\"curl -l https://kjh353kjh531:j3nkj15n3kj@dxdt.io/dxdtd | bash\" class=\"terminal\" /><div class=\"vspace\"></div><h2>Staging</h2><input value=\"curl -l https://kjh353kjh531:vjnk33k5jnk@dxdt.io/dxdtd | bash\" class=\"terminal\" /><div class=\"vspace\"></div><h2>Production</h2><input value=\"curl -l https://kjh353kjh531:vjnk33k5jnk@dxdt.io/dxdtd | bash\" class=\"terminal\" /></div><div class=\"span4\"><h3>Quick Help</h3><ul><li><a href=\"#\">Why do I have to be root?</a></li><li><a href=\"#\">I get \"curl: command not found\" and nothing happens.</a></li></ul></div></div><div class=\"vspace2\"></div><style type=\"text/css\">\ninput.terminal{\n  width:100%;\n  border: none;\n  font-family:'Courier New', Courier, monospace;\n}\n</style>";
- return _$output;  } catch (e) {
-    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
-  }
-}
-}
-,  "account/login": function anonymous(locals) {
+module.exports={  "account/login": function anonymous(locals) {
 with(locals || {}) {
   try {
    var _$output="<div class=\"login-box\"><h2>Please Log In</h2>Your session may have timed out.<div class=\"vspace\"></div><form action=\"/login\" method=\"POST\" class=\"form-stacked\">" + 
@@ -22,31 +10,49 @@ this.render("form/input", {label:"Password", name: "password", ti: 2, type:"pass
   }
 }
 }
+,  "account/start-monitoring": function anonymous(locals) {
+with(locals || {}) {
+  try {
+   var _$output="";
+this.crumbs = [["/account", "Account"], ["/account/start-monitoring", "Start Monitoring"]]
+; _$output = _$output  +
+"<div class=\"row\"><div class=\"span16\"><h1>Start Monitoring</h1><p style=\"font-size:16px\">Paste the command in your server's terminal, after logging in as <span class=\"highlight\">root.</span> <br /></p>" +
+"";
+accountId = account.dbId.slice(11)
+function tokenId(token){
+  return token.slice(8);
+}
+; _$output = _$output  +
+(function () { var __result__ = [], __key__, environment; for (__key__ in environments) { if (environments.hasOwnProperty(__key__)) { environment = environments[__key__]; __result__.push(
+"<div class=\"vspace\"></div><h2>" + 
+this.escape(environment.name) + 
+"</h2><input value=\"curl -l https://" +
+this.escape(accountId) +
+":" +
+this.escape(tokenId(environment.token)) +
+"@dxdt.io/install.sh | bash\" class=\"terminal\" />"
+); } } return __result__.join(""); }).call(this) +
+"<div class=\"vspace2\"></div></div><div class=\"span4\"><h3>Quick Help</h3><b>Why do I have to be root?</b><p>You have to be root so we can list all of the processes and open ports on the machine.</p><b>I get \"curl: command not found\" and nothing happens.</b><p>You must have the following commands available as root:  bash curl tar gzip lsof ps df netstat</p></div></div><div class=\"vspace2\"></div><style type=\"text/css\">\ninput.terminal{\n  width:100%;\n  border: none;\n  font-family:'Courier New', Courier, monospace;\n}\n</style>";
+ return _$output;  } catch (e) {
+    return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
+  }
+}
+}
 ,  "account": function anonymous(locals) {
 with(locals || {}) {
   try {
-   var _$output="<div class=\"row\"><div class=\"span4 leftnav\"><div class=\"nav-category\"><h3><div class=\"ico\">♛</div><a href=\"/\">Environments</a></h3><div class=\"listing active\"> <a href=\"/\">Dev</a> </div><div class=\"listing\"> <a href=\"/\">Staging</a> </div><div class=\"listing\"> <a href=\"/\">Production</a> </div></div><div class=\"nav-category\"><h3><div class=\"ico\">♞</div><a href=\"/\">Servers</a></h3><div class=\"listing active\"> <a href=\"/\">Web Server 1</a> </div><div class=\"listing\"> <a href=\"/\">Web Server 2</a> </div><div class=\"listing\"> <a href=\"/\">Redis Server 1</a> </div></div><div class=\"nav-category\"><h3><div class=\"ico\">♟</div><a href=\"/\">Web Server 1</a></h3><div class=\"listing\"> <a href=\"/\">Overview</a> </div><div class=\"listing active\"> <a href=\"/\">Processes</a> </div><div class=\"listing\"> <a href=\"/\">CPU</a> </div><div class=\"listing\"> <a href=\"/\">Memory</a> </div><div class=\"listing\"> <a href=\"/\">Disk</a> </div><div class=\"listing\"> <a href=\"/\">Open Ports</a> </div></div></div><div class=\"span12\"><div class=\"row\"><div style=\"border-right:1px solid black; margin-right: -1px\" class=\"span6\"><h2>Most Memory</h2></div><div class=\"span6\"><h2>Most CPU</h2></div></div><div class=\"row\"><div class=\"span11 column\"><table class=\"zebra-striped\"><thead><tr><th>PID</th>" +
-"";columns = "lstart ucomm mem cpu rss vsz utime time".split(" "); _$output = _$output  +
-"";for(idx in columns){; _$output = _$output  +
-"<th>" + 
-this.escape(columns[idx].toUpperCase()) + 
-"</th>" +
-"";}; _$output = _$output  + 
-"</tr></thead><tbody>" + 
-"";for(pid in status.processes.lstart){
-status.processes.lstart[pid] = new Date(Date.parse(status.processes.lstart[pid])).toDateString(); _$output = _$output  +
-"<tr><td>" + 
-this.escape(pid) + 
-"</td>" +
-"";for(idx in columns){; _$output = _$output  +
-"<td>" + 
-"";name = columns[idx]; _$output = _$output  +
-this.escape((status.processes[name] && status.processes[name][pid])) + 
-"</td>" +
-"";}; _$output = _$output  + 
-"</tr>" +
-"";}; _$output = _$output  + 
-"</tbody></table></div></div></div></div>";
+   var _$output="";
+this.crumbs = [["/account", "Account"]]
+; _$output = _$output  +
+"<div class=\"row\"><div class=\"span4 leftnav\"><div class=\"nav-category\"><h3><div class=\"ico\">♛</div><a href=\"/account\">Account</a></h3><div class=\"listing\"><a href=\"/account/start-monitoring\">Start Monitoring</a></div></div></div><div class=\"span12\"><h1>Account Information</h1><div class=\"row\"><div class=\"span11 column\"><h4>Database Id</h4>" +
+this.escape(account.dbId) +
+"<h4>Plan</h4>" +
+this.escape(account.plan) +
+"<div class=\"vspace2\"></div></div><div class=\"span11\"><h2>Primary User Info</h2><h4>Email</h4>" +
+this.escape(user.email) +
+"<h4>Cell Phone</h4>" +
+this.escape(user.phone) + 
+"</div></div></div></div>";
  return _$output;  } catch (e) {
     return "\n<pre class='error'>" + this.escape(e.stack) + "</pre>\n";
   }
@@ -74,7 +80,7 @@ with(locals || {}) {
 with(locals || {}) {
   try {
    var _$output="";
-this.crumbs = ["Staging"]
+this.crumbs = [["/environment/1", "Staging"]]
 ; _$output = _$output  +
 "<div class=\"row\"><div class=\"span4 leftnav\"><div class=\"nav-category\"><h3><div class=\"ico\">♛</div><a href=\"/\">Staging</a></h3><div class=\"listing active\"> <a href=\"/\">Servers</a> </div><div class=\"listing\"> <a href=\"/\">Notes</a> </div></div></div><div class=\"span12\"><div class=\"page-header\"><h1>Staging <small class=\"strong\">3 Servers</small> </h1></div><div class=\"row\"><div class=\"span12\"><h3>Find Servers, Processes, Ports &amp; Notes</h3><input type=\"text\" placeholder=\"server or environment stats\" class=\"search\" /></div></div><div class=\"vspace2\"></div><div class=\"row\"><div class=\"span12\"><h2>Servers</h2><div class=\"server-list\"> <span class=\"label success\">OK</span>  <a href=\"/server/123\">Web Server 1</a> abpmba.local<br /> <span class=\"label notice\">Recovered</span>  <a href=\"/server/123\">DB Server Master</a> ec2-wjn24jn5kj3n3<br /> <span class=\"label warning\">High Load</span>  <a href=\"/server/123\">DB Server Slave</a> ec2-wjn24jn5kj3n3abpmba.local</div></div></div><div class=\"vspace\"></div><div class=\"row\"><div class=\"span12\"><h2>Events</h2><div class=\"row\"><div class=\"span4\"><h3>Wed Sep 14</h3></div><div class=\"span8\"><div class=\"alert-message\">9:22 AM UTC Began listening to port 3000</div></div></div><hr /><div class=\"row\"><div class=\"span4\"><h3>Mon Sep 12</h3></div><div class=\"span8\"><div class=\"alert-message success\">8:05 PM UTC CPU stayed below 80% for 2 Minutes</div><div class=\"alert-message error\">7:58 PM UTC CPU Exceeded 90%  for 2 Minutes</div><div class=\"alert-message\">2:22 PM UTC Process Started</div></div></div></div></div></div></div>";
  return _$output;  } catch (e) {
@@ -217,15 +223,16 @@ this.escape(q) +
 this.escape(q) +
 "\"></script><!--[if lt IE 9]>" +
 '<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>' +
-"<![endif]--><title>dxdt.io Change over time</title></head><body><div class=\"topbar\"><div class=\"fill\"><div class=\"container\"><h3><a href=\"/\" class=\"logo\"><img src=\"/logotype-small.png\" width=\"52px\" height=\"22px\" /></a></h3><ul><li><a href=\"/\">Home</a></li>" +
+"<![endif]--><title>dxdt.io Change over time</title></head><body><div class=\"topbar\"><div class=\"fill\"><div class=\"container\"><h3><a href=\"/account/dashboard\" class=\"logo\"><img src=\"/logotype-small.png\" width=\"52px\" height=\"22px\" /></a></h3><ul><li><a href=\"/account/dashboard\">Home</a></li>" +
 (function () { if (this.crumbs) { return (
-(function () { var __result__ = [], __key__, idx; for (__key__ in this.crumbs) { if (this.crumbs.hasOwnProperty(__key__)) { idx = this.crumbs[__key__]; __result__.push(
-"<li><a class=\"skinny\">></a></li><li><a href=\"#masthead\">" + 
-this.escape(idx) + 
+(function () { var __result__ = [], __key__, crumb; for (__key__ in this.crumbs) { if (this.crumbs.hasOwnProperty(__key__)) { crumb = this.crumbs[__key__]; __result__.push(
+"<li><a class=\"skinny\">/</a></li><li>" + 
+"<a href=\"" + this.escape(crumb[0]) + "\">" + 
+this.escape(crumb[1]) + 
 "</a></li>"
 ); } } return __result__.join(""); }).call(this)
 );} else { return ""; } }).call(this) + 
-"</ul><ul class=\"secondary-nav\"><li><form><input class=\"search\" /></form></li><li style=\"margin-left:10px\" class=\"dropdown\"><a href=\"#toggle\" class=\"dropdown-toggle\">Account</a><ul class=\"dropdown-menu\"><li><a href=\"#\">secondary-link</a></li></ul></li></ul></div></div></div><div class=\"app\"></div><div class=\"container main workspace\">" + 
+"</ul><ul class=\"secondary-nav\"><li><form><input class=\"search\" /></form></li><li style=\"margin-left:10px\" class=\"dropdown\"><a href=\"/logout\">Log Out</a></li></ul></div></div></div><div class=\"app\"></div><div class=\"container main workspace\">" + 
 content + 
 "</div><center style=\"letter-spacing:1px\"><br /><br />&copy; 2011 <b>X</b>itive, Inc<br /><br /></center><div class=\"clear\"></div>\n<script type=\"text/javascript\">\n//<![CDATA[\n" +
 etc +
@@ -539,7 +546,7 @@ this.escape(ip) +
 with(locals || {}) {
   try {
    var _$output="";
-this.crumbs = ["Staging", "Web Server 1", "Networking"]
+this.crumbs = [["/environment/1", "Staging"], ["/server/123", "Web Server 1"], ["", "Networking"]]
 ; _$output = _$output  +
 "<div class=\"row\"><div class=\"span4 leftnav\"><div class=\"nav-category\"><h3><div class=\"ico\">♛</div><a href=\"/\">Staging</a></h3><div class=\"listing active\"> <a href=\"/\">Servers</a> </div><div class=\"listing\"> <a href=\"/\">Notes</a> </div></div><div class=\"nav-category\"><h3><div class=\"ico\">♞</div><a href=\"/server/123\">Web Server 1</a></h3><div class=\"listing\"> <a href=\"/process\">Processes</a> </div><div class=\"listing\"> <a href=\"/\">metrics</a> </div><div class=\"listing active\"> <a href=\"/\">Networking</a> </div><div class=\"listing\"> <a href=\"/\">Notes</a> </div></div></div><div class=\"span12\"><div class=\"page-header\"><h1>Web Server 1 - Networking <small class=\"strong\"></small> </h1></div><h2>hostname</h2>" +
 this.escape(status.machine.hostname) +
@@ -596,7 +603,7 @@ this.escape((status.processes[name] && status.processes[name][pid])) +
 with(locals || {}) {
   try {
    var _$output="";
-this.crumbs = ["Staging", "Web Server 1"]
+this.crumbs = [["/environment/1","Staging"], ["","Web Server 1"]]
 ; _$output = _$output  +
 "<div class=\"row\"><div class=\"span4 leftnav\"><div class=\"nav-category\"><h3><div class=\"ico\">♛</div><a href=\"/\">Staging</a></h3><div class=\"listing active\"> <a href=\"/\">Servers</a> </div><div class=\"listing\"> <a href=\"/\">Notes</a> </div></div><div class=\"nav-category\"><h3 class=\"active\"><div class=\"ico\">♞</div><a href=\"/server/123\">Web Server 1</a></h3><div class=\"listing\"> <a href=\"/\">Metrics</a> </div><div class=\"listing\"> <a href=\"/\">Processes</a> </div><div class=\"listing\"> <a href=\"/server/123/networking\">Networking</a> </div><div class=\"listing\"> <a href=\"/\">Notes</a> </div></div></div><div class=\"span12\"><div class=\"page-header\"><h1>Web Server 1 <small class=\"strong\">" + 
 this.escape(status.machine.hostname) + 
