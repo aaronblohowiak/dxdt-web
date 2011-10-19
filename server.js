@@ -62,7 +62,8 @@ if(process.env.NODE_ENV == "production"){
     sessionsClient: sessions,
     workQueueClient: workQueue,
     provisionsClient: provisions,
-    provisioner: provisioner
+    provisioner: provisioner,
+    hostnames: dxdtConf.hostnames
   };
 
   Transitive.boot(this, options);

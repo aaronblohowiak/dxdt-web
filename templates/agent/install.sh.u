@@ -1,0 +1,166 @@
+#!/usr/bin/env bash
+
+##############################################################################
+#
+#              _______                     _______                
+#              \  ___ `'.                  \  ___ `'.             
+#               ' |--.\  \                  ' |--.\  \            
+#               | |    \  '                 | |    \  '      .|   
+#               | |     |  ' ____     _____ | |     |  '   .' |_  
+#               | |     |  |`.   \  .'    / | |     |  | .'     | 
+#               | |     ' .'  `.  `'    .'  | |     ' .''--.  .-' 
+#               | |___.' /'     '.    .'    | |___.' /'    |  |   
+#              /_______.'/      .'     `.  /_______.'/     |  |   
+#              \_______|/     .'  .'`.   `.\_______|/      |  '.
+#                           .'   /    `.   `.              |   /  
+#                          '----'       '----'             `'-'  
+#
+#
+##############################################################################
+#
+#
+#   https://dxdt.io Server Monitoring
+#   This software is provided with NO WARRANTY,  express or implied.
+#   While we believe that it is a fine piece of code, we make no garauntees.
+#   It might destroy your computer, or launch nukes at the USSR.
+# 
+#   By using this software, you agree to the terms and conditions at
+#     https://dxdt.io/terms
+#
+#
+##############################################################################
+
+
+
+##############################################################################
+#  Overview
+##############################################################################
+#
+#  This script does a few things:
+#  
+#    1. Check for all pre-requisite commands (grep, tar, lsof, ifconfig...)
+#    2. Create folder structure
+#    3. Install files into the appropriate location
+#    4. Report progress to dxdt
+#    5. Launch the stats collecting agent (dxdt-collectd)
+#
+#  If you have any questions about how this works, email questions@dxdt.io
+#
+##############################################################################
+
+
+##############################################################################
+# Environment Variables (Options)
+##############################################################################
+#
+# Set DXDT_MACHINE_ID to a unique url-safe string for each computer
+#  or to override default.
+#  Note: we use this to connect data to the machine, so if you change it,
+#  You will be creating a new machine!
+#
+# Set DXDT_BASE_DIR to the folder that you want DXDT to use as its root.
+#   by default it is /opt/dxdt
+#
+# Note that we still put the conf in /etc/dxdt.conf
+#
+##############################################################################
+
+##############################################################################
+# Begin critical section; exit if any line returns anything non 0
+##############################################################################
+set -e
+##############################################################################
+
+
+
+# This should never change unless you are a dxdt developer :)
+DXDT_ENDPOINT="<%= endpoint %>";
+
+# This is your account API Key.  It is not a secret.
+DXDT_API_KEY="<%= apiKey %>";
+
+#Tokens grant acess to a specific environment for a given account.
+#  Every time you download the install.sh script, we generate a new token for you
+#  this lets you revoke tokens in a fine-grained way.
+#  The tokens created have read+write access, but not GRANT access.
+DXDT_TOKEN="<%= token %>";
+
+# Machine id MUST be unique per account.  A unique one is generated on download
+#  OR use the env var DXDT_MACHINE_ID if you want to override it.
+#    
+#  If you are going to re-use the install script you have downloaded, you MUST
+#    specify a new DXDT_MACHINE_ID for each new machine.
+
+if test "$DXDT_MACHINE_ID"
+then DXDT_MACHINE_ID="$DXDT_MACHINE_ID"; #noop, but useful for readability.
+else
+ DXDT_MACHINE_ID="<%= machineId %>" ;
+fi
+
+# Where to store the dxdt-collectd script
+if test "$DXDT_BASE_DIR"
+then DXDT_BASE_DIR="$DXDT_BASE_DIR";
+else DXDT_BASE_DIR="/opt/dxdt";
+fi
+
+function failedInstall {
+  #TODO: include PATH
+  code=`curl -d "machineid=$DXDT_MACHINE_ID" -d "failure=$1" --user "$DXDT_API_KEY:$DXDT_TOKEN" --write-out %{http_code} --silent --output /dev/null $DXDT_ENDPOINT/install-failed`;
+}
+
+# Start Capability Checks.
+if command -v md5 &>/dev/null; 
+  then hshcommand="md5"; #BSD
+  else
+    if command -v md5sum &>/dev/null
+    then hshcommand="md5sum"; #LINUX
+    else failedInstall "Please install md5 or md5sum and make sure it is in the PATH.";
+    fi
+fi
+
+if command -v ifconfig &>/dev/null;
+  then networkConfiguration=`ifconfig -a`;
+  else failedInstall "Please install ifconfig and make sure it is in the PATH.";
+fi
+
+
+function testCommand {
+  if command -v $1 &>/dev/null;
+    then echo "Command found: $1";
+    else failedInstall "Please install $1 and make sure it is in the PATH.";
+  fi
+  return 0
+}
+
+for command in date rm time tar grep uptime lsof df ifconfig mkdir
+do
+  testCommand $command
+done
+
+##############################################################################
+#  Create directories
+##############################################################################
+
+#TODO: Report failure if it should occur.
+mkdir -p $DXDT_BASE_DIR
+
+##############################################################################
+#  Write Config File
+##############################################################################
+
+(
+cat<<EOF
+#!/usr/bin/env bash
+export DXDT_ENDPOINT="$DXDT_ENDPOINT"
+export DXDT_API_KEY="$DXDT_API_KEY"
+export DXDT_TOKEN="$DXDT_TOKEN"
+export DXDT_MACHINE_ID="$DXDT_MACHINE_ID"
+export DXDT_BASE_DIR="$DXDT_BASE_DIR"
+EOF
+)> /etc/dxdt-collectd.conf
+
+# we want to be able to execute it to set up our environment
+chmod +rx /etc/dxdt-collectd.conf
+
+
+

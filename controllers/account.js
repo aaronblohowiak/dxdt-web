@@ -1,9 +1,9 @@
 fs = require("fs");
 var formulate = require("formulate");
 var passwords = require("../lib/passwords.js");
-var Cookies = require("cookies");
 var sha1 = require("easyhash")('sha1');
 var timeseries = require("../lib/timeseries-db");
+var basicAuth = require("../lib/basic-auth");
 
 module.exports = function(routes, Transitive){
   function renderAccount(res, template, locals){
@@ -65,6 +65,7 @@ module.exports = function(routes, Transitive){
 
   function withTsDb(id, cb){
     provisions.hgetall(id, function(err, dbInfo){
+      if(err) return cb(err);
       timeseries.createClient(dbInfo, cb);
     });  
   }
@@ -96,10 +97,73 @@ module.exports = function(routes, Transitive){
       if(err) return console.log(err);
       withEnvironments(client, function(err, environments){
         console.log(environments);
-        renderAccount(res, "account/start-monitoring", { user:req.user, account:req.account, environments: environments });
+        renderAccount(res, "account/start-monitoring", { 
+          user:req.user, 
+          account:req.account, 
+          environments: environments,
+          hostnames: Transitive.App.hostnames
+        });
       })
     });
   });
+  
+  routes.get("/install.sh", function(req, res){
+    var auth = basicAuth(req);
+    withTsDb("/databases/"+auth[0], function(err, client){
+      if(err){
+        res.writeHead(500,{'Content-Type':'text/plain'});
+        res.end("Could not connect to account.");
+        return;
+      }
+      client.hgetall("/tokens/"+auth[1], function(err, token){
+        if(err){
+          res.writeHead(500,{'Content-Type':'text/plain'});
+          res.end("Could not connect to account.");
+          return;
+        }
+        if(token && parseInt(token.level, 10) >=3){
+          newInstall(Transitive, req, res, client, auth[0], token.on);
+        }else{
+          res.writeHead(403,{'Content-Type':'text/plain'});
+          res.end("Invalid token.\n");
+          return;
+        }
+      });
+    });
+  });
+
+
+  function newInstall(Transitive, req, res, client, apiKey, environment){
+    createToken(client, environment, 2, function(err, token){
+      var apiToken = token.id.slice(8);
+      res.writeHead(200, {'Content-Type':'text/plain'});
+      res.end(Transitive.Views.render("agent/install.sh", {
+        endpoint: Transitive.App.hostnames.api, 
+        apiKey: apiKey,
+        token: apiToken,
+        machineId: newId(22, 62)
+      })); 
+    });
+  }
+
+  function createToken(client, environment, level, cb){
+    var tokenId = newId(32, 62);
+    
+    var token = {
+      id: "/tokens/"+tokenId,
+      on: environment,
+      level: level, // none, read, write, admin!
+      createdAt: Math.floor((new Date())/1000)
+    }
+    
+    client.sadd(environment+"/tokens", "/tokens/"+tokenId, function(err, status){
+      if(err) return cb(err);
+      client.hmset("/tokens/"+tokenId, token, function(err, status){        
+        cb(err, token);
+      });
+    });
+  }
+  
   
   get("/account", function(req, res){
     renderAccount(res, "account", {user:req.user, account:req.account});

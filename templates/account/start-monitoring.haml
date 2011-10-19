@@ -17,7 +17,7 @@
     :for environment in environments
       .vspace
       %h2= environment.name
-      %input.terminal(value="curl -l https://#{accountId}:#{tokenId(environment.token)}@dxdt.io/install.sh | bash")
+      %input.terminal(value="curl -l https://#{accountId}:#{tokenId(environment.token)}@#{hostnames.api}/install.sh | bash")
     .vspace2 
   .span4
     %h3 Quick Help
