@@ -30,8 +30,6 @@
 #
 ##############################################################################
 
-
-
 ##############################################################################
 #  Overview
 ##############################################################################
@@ -47,7 +45,6 @@
 #  If you have any questions about how this works, email questions@dxdt.io
 #
 ##############################################################################
-
 
 ##############################################################################
 # Environment Variables (Options)
@@ -70,8 +67,6 @@
 ##############################################################################
 set -e
 ##############################################################################
-
-
 
 # This should never change unless you are a dxdt developer :)
 DXDT_ENDPOINT="<%= endpoint %>";
@@ -97,57 +92,18 @@ else
  DXDT_MACHINE_ID="<%= machineId %>" ;
 fi
 
-# Where to store the dxdt-collectd script
 if test "$DXDT_BASE_DIR"
 then DXDT_BASE_DIR="$DXDT_BASE_DIR";
 else DXDT_BASE_DIR="/opt/dxdt";
 fi
 
-function failedInstall {
-  #TODO: include PATH
-  code=`curl -d "machineid=$DXDT_MACHINE_ID" -d "failure=$1" --user "$DXDT_API_KEY:$DXDT_TOKEN" --write-out %{http_code} --silent --output /dev/null $DXDT_ENDPOINT/install-failed`;
-}
-
-# Start Capability Checks.
-if command -v md5 &>/dev/null; 
-  then hshcommand="md5"; #BSD
-  else
-    if command -v md5sum &>/dev/null
-    then hshcommand="md5sum"; #LINUX
-    else failedInstall "Please install md5 or md5sum and make sure it is in the PATH.";
-    fi
-fi
-
-if command -v ifconfig &>/dev/null;
-  then networkConfiguration=`ifconfig -a`;
-  else failedInstall "Please install ifconfig and make sure it is in the PATH.";
-fi
-
-
-function testCommand {
-  if command -v $1 &>/dev/null;
-    then echo "Command found: $1";
-    else failedInstall "Please install $1 and make sure it is in the PATH.";
-  fi
-  return 0
-}
-
-for command in date rm time tar grep uptime lsof df ifconfig mkdir
-do
-  testCommand $command
-done
-
 ##############################################################################
-#  Create directories
+#  Read or Write Config File.
 ##############################################################################
 
-#TODO: Report failure if it should occur.
-mkdir -p $DXDT_BASE_DIR
-
-##############################################################################
-#  Write Config File
-##############################################################################
-
+if [ -f /etc/dxdt-collectd.conf ]
+then source /etc/dxdt-collectd.conf;
+else 
 (
 cat<<EOF
 #!/usr/bin/env bash
@@ -158,16 +114,70 @@ export DXDT_MACHINE_ID="$DXDT_MACHINE_ID"
 export DXDT_BASE_DIR="$DXDT_BASE_DIR"
 EOF
 )> /etc/dxdt-collectd.conf
+fi
+
+if [ -f /etc/dxdt-collectd.conf ]
+then true;
+else
+  echo "Could not write /etc/dxdt-collectd.conf. Are you running as root?"
+  exit
+fi
+echo This machine has the id: $DXDT_MACHINE_ID
+
+##############################################################################
+
+function failedInstall {
+  echo $1
+  #TODO: include PATH
+  code=`curl -d "machineid=$DXDT_MACHINE_ID" -d "failure=$1" --user "$DXDT_API_KEY:$DXDT_TOKEN" --write-out %{http_code} --silent --output /dev/null $DXDT_ENDPOINT/install-failed`;
+}
+
+##############################################################################
+#  Capability Checks
+##############################################################################
+
+function testCommand {
+  if command -v $1 &>/dev/null;
+    then true;
+    else failedInstall "Please install $1 and make sure it is in the PATH.";
+  fi
+  return 0
+}
+
+for command in date rm time tar grep uptime lsof df ifconfig mkdir
+do
+  testCommand $command
+done
+
+#md5 is special because it is sometimes called md5sum. grrrr. 
+if command -v md5 &>/dev/null; 
+  then true;
+  else
+    if command -v md5sum &>/dev/null
+    then true;
+    else failedInstall "Please install md5 or md5sum and make sure it is in the PATH.";
+    fi
+fi
+
+##############################################################################
+#  Create directories
+##############################################################################
+
+#TODO: Report failure if it should occur.
+mkdir -p $DXDT_BASE_DIR
 
 # we want to be able to execute it to set up our environment
 chmod +rx /etc/dxdt-collectd.conf
 
+##############################################################################
+#  Write dxdt-collectd.sh File
+##############################################################################
 
 (
-cat<<"DXDT-COLLECTD-SOURCE"
+cat<<"DXDT-COLLECTOR-SOURCE"
     #!/usr/bin/env bash
 
-    if [ -n  /etc/dxdt-collectd.conf ]
+    if [ -f /etc/dxdt-collectd.conf ]
     then source /etc/dxdt-collectd.conf;
     else 
       echo "You MUST have an /etc/dxdt-collectd.conf that contains the DXDT_* environment variables.";
@@ -182,7 +192,9 @@ cat<<"DXDT-COLLECTD-SOURCE"
 
     if [ -n "$1" ]
     then infodir="$1";
-    else infodir="stats_`date +%s`"; 
+    else
+      mkdir -p /tmp/dxdt/
+      infodir="/tmp/dxdt/stats_`date +%s`"; 
     fi
 
     process_dir="$infodir/processes"
@@ -203,9 +215,6 @@ cat<<"DXDT-COLLECTD-SOURCE"
       else  vmcommand="vmstat"; #LINUX
     fi
 
-
-    # Generic Run a command and save stdout and stderr to files
-
     function runAndRecordWithTime {
       # command directory basename
       /usr/bin/time -p bash -c "$1 1>$2/$3.stdout.txt 2>$2/$3.stderr.txt" 2> $2/$3.time.txt;
@@ -213,7 +222,6 @@ cat<<"DXDT-COLLECTD-SOURCE"
 
     function runAndRecord {
       # command directory basename
-      #  optionally include the time to run the command (expensive.)
       $1 > "$2/$3.stdout.txt" 2> "$2/$3.stderr.txt";
     }
 
@@ -222,7 +230,6 @@ cat<<"DXDT-COLLECTD-SOURCE"
       runAndRecord "$1" "$2" "$1"
     }
 
-
     # Process monitoring functions
     function runAndRecordProcess {
       # command basename
@@ -230,7 +237,6 @@ cat<<"DXDT-COLLECTD-SOURCE"
     }
 
     # Utility function to get info about all the processes on the machine
-    # Note that we have to do this with multiple calls to ps because the output of `ps` is otherwise not machine parseable
     pslist="ps -A -o pid -o"
     function getInfo {
       # ps format string
@@ -238,7 +244,6 @@ cat<<"DXDT-COLLECTD-SOURCE"
     }
 
     function getInfoPercent {
-      # ps format string that will be prepended with %
       runAndRecordProcess "$pslist %$1" $1
     }
 
@@ -247,7 +252,6 @@ cat<<"DXDT-COLLECTD-SOURCE"
     ###############################################################
     set +e
     ###############################################################
-
 
     getInfo lstart #Full start time
     getInfo ucomm # simple name
@@ -293,16 +297,38 @@ cat<<"DXDT-COLLECTD-SOURCE"
       set +e
 
       code=`curl -F "bulk=@$filename" --user "$DXDT_API_KEY:$DXDT_TOKEN" --write-out %{http_code} --silent --output /dev/null $DXDT_ENDPOINT`;
-    set -e
+      set -e
 
-    echo $code
+      echo $code
 
-    if [ "$code" == "200" ]; then
-      `rm $filename`;
-    else
-      echo "upload of $filename failed, will not delete.";
-    fi
+      if [ "$code" == "200" ]; then
+        `rm $filename`;
+      else
+        echo "upload of $filename failed, will not delete.";
+      fi
     done
 
+DXDT-COLLECTOR-SOURCE
+)> /opt/dxdt/dxdt-collector.sh
+
+(
+cat<<"DXDT-COLLECTD-SOURCE"
+#!/usr/bin/env bash
+
+while true
+do 
+bash /opt/dxdt/dxdt-collector.sh
+sleep 30
+done
 DXDT-COLLECTD-SOURCE
 )> /opt/dxdt/dxdt-collectd.sh
+
+chmod +x /opt/dxdt/dxdt-collectd.sh
+
+# Report Progress.
+#TODO: report progress!
+
+# Start dxdt-collectd.sh in background.
+bash /opt/dxdt/dxdt-collectd.sh & disown
+
+
