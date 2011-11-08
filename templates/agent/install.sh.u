@@ -55,7 +55,7 @@
 #  Note: we use this to connect data to the machine, so if you change it,
 #  You will be creating a new machine!
 #
-# Set DXDT_BASE_DIR to the folder that you want DXDT to use as its root.
+# Set DXDT_SCRIPT_DIR to the folder that you want DXDT to use as its root.
 #   by default it is /opt/dxdt
 #
 # Note that we still put the conf in /etc/dxdt.conf
@@ -69,7 +69,7 @@ set -e
 ##############################################################################
 
 # This should never change unless you are a dxdt developer :)
-DXDT_ENDPOINT="<%= endpoint %>";
+DXDT_ENDPOINT="https://<%= endpoint %>";
 
 # This is your account API Key.  It is not a secret.
 DXDT_API_KEY="<%= apiKey %>";
@@ -92,10 +92,23 @@ else
  DXDT_MACHINE_ID="<%= machineId %>" ;
 fi
 
-if test "$DXDT_BASE_DIR"
-then DXDT_BASE_DIR="$DXDT_BASE_DIR";
-else DXDT_BASE_DIR="/opt/dxdt";
+if test "$DXDT_SCRIPT_DIR"
+then DXDT_SCRIPT_DIR="$DXDT_SCRIPT_DIR";
+else DXDT_SCRIPT_DIR="/opt/dxdt";
 fi
+
+if test "$DXDT_DATA_DIR"
+then DXDT_DATA_DIR="$DXDT_DATA_DIR";
+else DXDT_DATA_DIR="/tmp/dxdt";
+fi
+
+##############################################################################
+
+function failedInstall {
+  echo $1
+  #TODO: include PATH
+  code=`curl -d "machineid=$DXDT_MACHINE_ID" -d "failure=$1" --user "$DXDT_API_KEY:$DXDT_TOKEN" --write-out %{http_code} --silent --output /dev/null $DXDT_ENDPOINT/install-failed`;
+}
 
 ##############################################################################
 #  Read or Write Config File.
@@ -111,7 +124,8 @@ export DXDT_ENDPOINT="$DXDT_ENDPOINT"
 export DXDT_API_KEY="$DXDT_API_KEY"
 export DXDT_TOKEN="$DXDT_TOKEN"
 export DXDT_MACHINE_ID="$DXDT_MACHINE_ID"
-export DXDT_BASE_DIR="$DXDT_BASE_DIR"
+export DXDT_SCRIPT_DIR="$DXDT_SCRIPT_DIR"
+export DXDT_DATA_DIR="$DXDT_DATA_DIR"
 EOF
 )> /etc/dxdt-collectd.conf
 fi
@@ -119,18 +133,14 @@ fi
 if [ -f /etc/dxdt-collectd.conf ]
 then true;
 else
-  echo "Could not write /etc/dxdt-collectd.conf. Are you running as root?"
+  failedInstall "Could not write /etc/dxdt-collectd.conf. Are you running as root?"
+  echo "The current user is $USER";
+  echo "To run as root, please type"
+  echo "     sudo su"
+  echo "and then try again."
   exit
 fi
 echo This machine has the id: $DXDT_MACHINE_ID
-
-##############################################################################
-
-function failedInstall {
-  echo $1
-  #TODO: include PATH
-  code=`curl -d "machineid=$DXDT_MACHINE_ID" -d "failure=$1" --user "$DXDT_API_KEY:$DXDT_TOKEN" --write-out %{http_code} --silent --output /dev/null $DXDT_ENDPOINT/install-failed`;
-}
 
 ##############################################################################
 #  Capability Checks
@@ -139,7 +149,10 @@ function failedInstall {
 function testCommand {
   if command -v $1 &>/dev/null;
     then true;
-    else failedInstall "Please install $1 and make sure it is in the PATH.";
+    else
+      failedInstall "Please install $1 and make sure it is in the PATH.";
+      echo "The current user is $USER";
+      echo "The current path is $PATH";
   fi
   return 0
 }
@@ -164,7 +177,8 @@ fi
 ##############################################################################
 
 #TODO: Report failure if it should occur.
-mkdir -p $DXDT_BASE_DIR
+mkdir -p $DXDT_SCRIPT_DIR
+mkdir -p $DXDT_DATA_DIR
 
 # we want to be able to execute it to set up our environment
 chmod +rx /etc/dxdt-collectd.conf
@@ -190,12 +204,12 @@ cat<<"DXDT-COLLECTOR-SOURCE"
     set -e
     ###############################################################
 
-    if [ -n "$1" ]
-    then infodir="$1";
-    else
-      mkdir -p /tmp/dxdt/
-      infodir="/tmp/dxdt/stats_`date +%s`"; 
-    fi
+
+    mkdir -p $DXDT_DATA_DIR
+    cd $DXDT_DATA_DIR
+
+    infodir="stats_`date +%s`";
+    mkdir -p $infodir
 
     process_dir="$infodir/processes"
     sys_dir="$infodir/sys"
@@ -293,7 +307,7 @@ cat<<"DXDT-COLLECTOR-SOURCE"
     ###############################################################
     # Begin uploading. Will attempt to upload all .tgz files in dir
     ###############################################################
-    for filename in *.tgz; do
+    for filename in $DXDT_DATA_DIR/*.tgz; do
       set +e
 
       code=`curl -F "bulk=@$filename" --user "$DXDT_API_KEY:$DXDT_TOKEN" --write-out %{http_code} --silent --output /dev/null $DXDT_ENDPOINT`;
