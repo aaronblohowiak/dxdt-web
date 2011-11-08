@@ -1,0 +1,31 @@
+.update
+- if(locals.type == "download"){
+%h4
+  Installer Downloaded
+  %small>
+    = (new Date()).toString()
+%b> From:
+#{ip}
+%br
+%b> New Token:
+#{token}
+%br
+%b> Machine Id:
+#{machineId} 
+- } else if(locals.type == "failed"){
+%h4
+  Install Failed
+  %small>
+    = (new Date()).toString()
+%b> Reason:
+= reason
+%br
+Please See the output in your terminal for more details.
+- } else if(locals.type == "success"){
+%h4
+  Installed Successfully
+  %small>
+    = (new Date()).toString()
+New machine kn3kjn3kjn3kkj2n1l1ow1owiaevcboaiw added.
+%a(href="/servers/123") Administer it now.
+- }

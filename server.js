@@ -23,6 +23,8 @@ var provisioner = require("./lib/provisioner-client");
 provisioner.provisionerdb = provisions;
 provisioner.resque = workQueue;
 
+
+
 var Transitive = new (require("transitive"))();
 
 var options = {};
@@ -67,6 +69,22 @@ if(process.env.NODE_ENV == "production"){
   };
 
   Transitive.boot(this, options);
+  
+  var redisPubSub = redis(resqueConf.port, resqueConf.host);
+  redisPubSub.auth(resqueConf.password, function(){
+    redisPubSub.on("pmessage", function(pattern, channel, message){
+      channel = channel.slice(7);
+      console.log(JSON.parse(message));
+      Transitive.pushIt.publish(channel, JSON.parse(message));
+    });
+  
+    redisPubSub.psubscribe("/pushIt/*", function(){
+      console.log("IN CALLBACK")
+      console.log(arguments)
+    });
+  });
+
+
 })();
 
 console.log("Server started. listening on port " + Transitive.server.address().port);

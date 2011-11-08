@@ -92,14 +92,19 @@ module.exports = function(routes, Transitive){
     smemhashes(client, "/environments", cb);
   }
 
+
+  function publicAccountId(account){
+    return accountId = account.dbId.slice(11)
+  };
+  
   get("/account/start-monitoring", function(req, res){
     withTsDb(req.account.dbId, function(err, client){
       if(err) return console.log(err);
       withEnvironments(client, function(err, environments){
-        console.log(environments);
         renderAccount(res, "account/start-monitoring", { 
           user:req.user, 
           account:req.account, 
+          accountId: publicAccountId(req.account),
           environments: environments,
           hostnames: Transitive.App.hostnames
         });
@@ -133,17 +138,27 @@ module.exports = function(routes, Transitive){
   });
 
 
-  function newInstall(Transitive, req, res, client, apiKey, environment){
+  function newInstall(Transitive, req, res, client, apiKey, environment){    
     createToken(client, environment, 2, function(err, token){
       var apiToken = token.id.slice(8);
       res.writeHead(200, {'Content-Type':'text/plain'});
+      var machineId = newId(22, 62);
       res.end(Transitive.Views.render("agent/install.sh", {
         endpoint: Transitive.App.hostnames.api, 
         apiKey: apiKey,
         token: apiToken,
-        machineId: newId(22, 62)
+        machineId: machineId
       })); 
+
+
+      Transitive.pushIt.publish('/accounts/'+apiKey+'/installer', {
+        type: 'download',
+        token: apiToken,
+        machineId: machineId,
+        ip: req.connection.socket.remoteAddress
+      });
     });
+
   }
 
   function createToken(client, environment, level, cb){

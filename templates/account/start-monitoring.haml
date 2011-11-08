@@ -9,7 +9,6 @@
       %br
    
     - 
-      accountId = account.dbId.slice(11)
       function tokenId(token){
         return token.slice(8);
       }
@@ -17,8 +16,9 @@
     :for environment in environments
       .vspace
       %h2= environment.name
-      %input.terminal(value="curl -l https://#{accountId}:#{tokenId(environment.token)}@#{hostnames.api}/install.sh | bash")
+      %input.terminal(value="curl -l https://#{accountId}:#{tokenId(environment.token)}@#{hostnames.web}/install.sh | bash")
     .vspace2 
+.row
   .span4
     %h3 Quick Help
     %b Why do I have to be root?
@@ -29,12 +29,22 @@
 
     %b bash: line 117: /etc/dxdt-collectd.conf: Permission denied
     %p You must run the command as root so we can install and see all the processes and open ports on the machine.
- 
+  .span12
+    %h2
+      Server Updates
+      %img(src="/spin.gif")>
+      
+    -
+      var serverUpdates = []
+      serverUpdates.id = '/accounts/'+accountId+'/installer';
+    != this.renderLive('prepend', 'account/updates', serverUpdates)
 .vspace2
 
-:css
+%style(type="text/css")
   input.terminal{
     width:100%;
     border: none;
     font-family:'Courier New', Courier, monospace;
   }
+
+
