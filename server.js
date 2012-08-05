@@ -74,7 +74,6 @@ if(process.env.NODE_ENV == "production"){
   redisPubSub.auth(resqueConf.password, function(){
     redisPubSub.on("pmessage", function(pattern, channel, message){
       channel = channel.slice(7);
-      console.log(JSON.parse(message));
       Transitive.pushIt.publish(channel, JSON.parse(message));
     });
   

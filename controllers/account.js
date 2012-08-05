@@ -201,11 +201,19 @@ module.exports = function(routes, Transitive){
   });
   
   routes.post("/login", function(req, res){
+      console.log("login")
     formulate(req, res, function(err, fields){
+      console.log("FORMULATE")
       accounts.get("/users/byemail/"+sha1(fields.email.toLowerCase()), function(err, id){
+        console.log("byemail")
+        
         if(!id){ return res.end("No user found for that email address."); }
         accounts.hgetall(id, function(err, user){
+          console.log("getall")
+          
           passwords.check(fields.password, user.password, function(err, matches){
+            console.log("check")
+            
             if(matches){
               sessions.createSession(req, res, {
                   user: user.id
